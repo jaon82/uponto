@@ -1,4 +1,4 @@
 uPonto
 ======
 
-AplicaÃ§Ã£o para controle de registro e controle de jornada de trabalho
+Aplicação para controle de registro e controle de jornada de trabalho
