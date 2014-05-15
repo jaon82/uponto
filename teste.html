@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Teste</title>
+<style>
+body {
+	width: 650px;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<!-- script src="js/jquery-1.10.2.min.js"></script> -->
+<script type="text/javascript">
+	function teste() {
+		var pagePath = "http://www.ahgora.com.br/batidas/entrar/ajax";
+		//$.post(pagePath,{"dados[empresa]":"a665612","dados[matricula]":"807","dados[senha]":"807"},function(data){
+		//	console.log(data);
+		//	$("#conteudo").val(data);
+		//},"json");
+		
+        $.ajax({
+          url: pagePath,
+          type: "POST",
+          contentType: "application/x-www-form-urlencoded",
+          data: {"dados[empresa]":"a665612","dados[matricula]":"807","dados[senha]":"807"},
+          success: function(){
+             console.log(data);
+          },
+          failure: function(){
+              alert(teste);
+          }
+          
+        });
+                	/*$.ajax({
+        
+                type: "POST",
+                url: "http://www.ahgora.com.br/batidas/entrar/ajax",
+                data: {"dados[empresa]":"a665612","dados[matricula]":"807","dados[senha]":"807"},
+                contentType: "application/json",
+                dataType: "json",
+                    success: function(data){
+                        console.log(data);
+                        
+                    },
+                    failure: function(errMsg) {
+                        console.log(errMsg);
+                    }
+        });*/
+		
+	}
+</script>
+</head>
+
+<body>
+	<header> </header>
+
+	<section>
+		<a href="#" onClick="teste();">Teste</a>
+		<div id="conteudo"></div>
+	</section>
+
+	<footer> </footer>
+</body>
+
+</html>
