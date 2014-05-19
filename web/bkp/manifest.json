@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Controle de Banco de Horas + Ahgora (beta)",
+  "description": "Chrome App para controle de horas de trabalho, com integração com o sistema Ahgora (www.ahgora.com.br).",
+  "version": "1.5.7",
+  "app": {
+    "launch": {
+      "local_path": "main.html"
+    }
+  },
+  "icons": {
+    "16": "res/icon_16.png",
+    "24": "res/icon_24.png",
+    "128": "res/icon_128.png"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "options_page": "options.html",
+
+ "content_security_policy": "script-src 'self' https://khi.by; object-src 'self'",
+      
+  "permissions": [
+	"unlimited_storage",
+    "notifications"
+  ],
+   "optional_permissions": [ 
+	"tabs", 
+	"https://khi.by/" 
+  ]
+}
