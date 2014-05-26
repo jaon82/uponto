@@ -1,11 +1,13 @@
 hrs = window.hrs || {};
 hrs.ui = window.hrs.ui || {};
+utils = new Utils();
 
 hrs.ui.main = (function($, helpers, dao){
 	var public = {};
 	
 	var currentDate = null,
 		currentMonth = null,
+		notif = null,
 		$container = null,
 		lightboxIndex = 3;
 	
@@ -18,7 +20,9 @@ hrs.ui.main = (function($, helpers, dao){
 		monthInformation();
 		importExport();
 		holidays();
+		initNotifications();
 		exportPdf();
+		initNotifTimer();
 		//initImport();
 		//checkPermission();
 		
@@ -35,6 +39,7 @@ hrs.ui.main = (function($, helpers, dao){
 			var fulldate = dateId + "/"+cYear;
 			var cDay = fulldate.substr(0,2);
 			var cMonth = fulldate.substr(3,2);
+			cMonth = parseInt(cMonth) - 1;
 			//alert(fulldate);
 			//alert(cMonth);
 			
@@ -52,22 +57,7 @@ hrs.ui.main = (function($, helpers, dao){
 		});
 	};
 	
-	function checkPermission(){
-		chrome.permissions.request({
-		  permissions: ['tabs'],
-		  origins: ['https://khi.by/']
-		}, function(granted) {
-		  // The callback argument will be true if the user granted the permissions.
-		  if (granted) {
-			//doSomething();
-		  } else {
-			//doSomethingElse();
-		  }
-		});
-	}
-	
 	function initImport(){
-		//checkPermission();		
 		currentMonth = new hrs.ui.month(currentDate.getMonth(), currentDate.getFullYear());
 		var cMonth = currentDate.getMonth();
 		var cYear = currentDate.getFullYear();
@@ -76,11 +66,7 @@ hrs.ui.main = (function($, helpers, dao){
 	
 	function importAhgora(month,year,day){
 		openLightbox("#perform-update");
-		
 
-		
-		//Teste Notificações e tal
-		//notificationTeste();
 		var dia = currentDate.getDate();
 		if(dia > 11){
 			month = parseInt(month) + 1;
@@ -121,12 +107,12 @@ hrs.ui.main = (function($, helpers, dao){
 				openLightbox("#msg-lightbox");
 				
 			} else {
-			//TODO: remover isso depois qeu for criado o cache na API
+			//TODO: remover isso depois que for criado o cache na API
 			//alert(month);
-			if(day > 0 && day <=15){
-				month--;
-				month = "0"+month;
-			}
+			//if(day > 0 && day <=15){
+				//month = parseInt(month) -1;
+				//month = "0"+month;
+			//}
 			
 			//alert(day);
 			//alert(month);
@@ -171,42 +157,44 @@ hrs.ui.main = (function($, helpers, dao){
 									mes = mes.substr(1,1);
 								}
 								mes = parseInt(mes) - 1;
+								
 								var rowDate = new Date(ano, mes, dia);
 								var curDate = new Date();
 								var ccM = curDate.getMonth();
 								var ccY = curDate.getFullYear();
 								var ccD = curDate.getDate();
 								var ccDate = new Date(ccY, ccM, ccD);
-								var dif = _dateHelpers.getTimeDiff(ccDate,rowDate);
+								//var dif = _dateHelpers.getTimeDiff(ccDate,rowDate);
+								//var intDif = parseInt(dif);
 								
 								//alert("Linha atual - "  + rowDate);
 								//alert("Hoje - "  + curDate);
 								//alert("Dif"  + dif);
-								var intDif = parseInt(dif);
 								//alert(intDif);
-								
 								
 								/*
-								- Só vai armazenar a importação se não foi uma importação por dia.
-								- Se foi uma importação por dia, só vai armazenar o dia atual.
+								- Só vai armazenar a importação se não foi uma importação por dia; ou
+								- Se foi uma importação por dia, só vai alterar o dia solicitado.
 								*/
-								
-								//alert(day);
-								//alert(intDif);
-								if(day == 0 || (day > 0 && intDif == 0)){
+								if(day == 0 || day == dia){
 									var batidas = dados[j].batidas.registros;
+									var timeRowDate = rowDate.getTime();
+									localStorage.getItem(timeRowDate);
 									
-									var jsonInfo = {
-										entrada: (!batidas[0])?0:_dateHelpers.parseDateTime(batidas[0], rowDate),
-										ida_almoco: (!batidas[1])?0:_dateHelpers.parseDateTime(batidas[1], rowDate),
-										volta_almoco: (!batidas[2])?0:_dateHelpers.parseDateTime(batidas[2], rowDate),
-										saida: (!batidas[3])?0:_dateHelpers.parseDateTime(batidas[3], rowDate),
-										vpn: 0,
-										obs: "Batidas originais: "+texto,
-										ausent: false
-									};
-									
-									dao.storeDate(rowDate, jsonInfo);
+									//Não vai sobrescrever registros que já existem, exceto quado se trata de uma atualização por dia.
+									if(timeRowDate != null && day == dia){
+										var jsonInfo = {
+											entrada: (!batidas[0])?0:_dateHelpers.parseDateTime(batidas[0], rowDate),
+											ida_almoco: (!batidas[1])?0:_dateHelpers.parseDateTime(batidas[1], rowDate),
+											volta_almoco: (!batidas[2])?0:_dateHelpers.parseDateTime(batidas[2], rowDate),
+											saida: (!batidas[3])?0:_dateHelpers.parseDateTime(batidas[3], rowDate),
+											vpn: 0,
+											obs: "Batidas originais: "+texto,
+											ausent: false
+										};
+										
+										dao.storeDate(rowDate, jsonInfo);
+									}
 								}
 								//exit;
 							}
@@ -243,38 +231,61 @@ hrs.ui.main = (function($, helpers, dao){
 		alert("Clicou na parada e tal...");
 	}
 	
+	function initNotifications(){
+		notif = new DesktopNotifications();
+	}
+	
+	function initNotifTimer(){
+		//1. Busca a hora de saída estimada do dia atual
+		var curDate = new Date();
+		var ccM = curDate.getMonth();
+		var ccY = curDate.getFullYear();
+		var ccD = curDate.getDate();
+		var ccDate = new Date(ccY, ccM, ccD);
+		var currDataInfo = currentMonth.getRowInfo(ccDate);
+		var saidaEsperada = currDataInfo.expectedExit;
+		var hSaida = saidaEsperada.substring(0,2);
+		var mSaida = saidaEsperada.substring(3,5);
+		var exitDate = new Date(ccY, ccM, ccD, hSaida, mSaida, 0, 0);
+		$("#proxSaidaExtimada").html(saidaEsperada);
+		updateHoraSaida(exitDate);
+	}
+	
 	function notificationTeste(){
 		
+		var browser = utils.checkbrowser();
 		
-//		 var opt = {
-//	        type: "list",
-//	        title: "Primary Title",
-//	        message: "Primary message to display",
-////	        iconUrl: "res/img/icon_16.png",
-//	        items: [{ title: "Item1", message: "This is item 1."},
-//	                { title: "Item2", message: "This is item 2."},
-//	                { title: "Item3", message: "This is item 3."}]
-//	      }
-//		
-//		var notification = chrome.notifications.create("12345678910", opt, testeNot);
-//		notification.show();
-		
-		/* //Desativado no FF
-		  var time = /(..)(:..)/.exec(new Date());     // The prettyprinted time.
-		  var hour = time[1] % 12 || 12;               // The prettyprinted hour.
-		  var period = time[1] < 12 ? 'a.m.' : 'p.m.'; // The period of the day.
-		  var notification = window.webkitNotifications.createNotification(
-		    '../res/img/icon_128.png',                      // The image.
-		    hour + time[2] + ' ' + period, // The title.
-		    'Time to make the toast.'      // The body.
-		  );
-		  notification.onclose = function(){ notificationTeste(); };
-		  //notification.show();
-		*/
+		if(browser.name == "Chrome" || browser.name == "Firefox"){
+			//checkPermission();
+			
+			var title = "Controle de Banco de Horas";
+			var options = {
+					  body: "Aqui vai o conteúdo da notificação",
+					  icon: "res/icon.png"
+					};
+			notif.create(title,options,null);
+			
+		} else {
+			alert("Notificações não implementadas para esta versão do seu browser.");
+		}
 		
 	}
 	
-	
+	function updateHoraSaida(exitDate){
+		//notificationTeste();
+		var curDate = new Date();
+		var _dateHelpers = hrs.helpers.dateTime;
+		var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
+	    var faltaParaSairShow = _dateHelpers.formatDate(dif, '#h:#m:#s');
+	    $("#proxSaidaTimer").html(faltaParaSairShow);
+	    
+	    var t = setTimeout(function(){
+	    	
+	    	updateHoraSaida(exitDate);
+	    	
+	    },500);
+	}
+
 	
 	function buildMonth(){
 		currentMonth = new hrs.ui.month(currentDate.getMonth(), currentDate.getFullYear());
@@ -452,7 +463,6 @@ hrs.ui.main = (function($, helpers, dao){
 			openLightbox("#confirm-import");
 		});
 	}
-
 	
 	function holidays(){
 		hrs.ui.holidays.init({ $elem: $("#holidays-list"), 

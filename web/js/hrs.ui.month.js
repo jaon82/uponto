@@ -13,6 +13,41 @@ hrs.ui.month = function(month, year) {
 
 	var _contextmenu = null;
 
+	public.getRowInfo = function(date){
+		var dateInfo = _dao.getDateInfo(date);
+		var observation = dateInfo.obs;
+		if(observation == "" && dateInfo.holiday && dateInfo.holiday.obs != ""){
+			observation = dateInfo.holiday.obs;
+		}
+
+		var formatedInfo = {
+			data: _dateHelpers.formatDate(date, '#d/#M'),
+			diaSemana: _dateHelpers.weekDay(date.getDay()),
+			entrada: _dateHelpers.formatDate(dateInfo.entrada, '#h:#m'),
+			ida_almoco: _dateHelpers.formatDate(dateInfo.ida_almoco, '#h:#m'),
+			volta_almoco: _dateHelpers.formatDate(dateInfo.volta_almoco, '#h:#m'),
+
+			saida: _dateHelpers.formatDate(dateInfo.saida, '#h:#m'),
+			vpn: _dateHelpers.formatDate(dateInfo.vpn, '#h:#m'),
+			total: _handleUndefinedDate(dateInfo.total),
+			almoco: _handleUndefinedDate(dateInfo.almoco),
+			excedente: _handleUndefinedDate(dateInfo.extra),
+			checked: dateInfo.ausent ? 'checked="checked"' : '',
+			holiday: dateInfo.holiday != null,
+			obs : observation,
+			cssObsPreenchida: (observation != "") ? ' filled' : ''
+		};
+
+		if(formatedInfo.entrada){
+			var expectedExit = _calculateExpectedExit(dateInfo.entrada.getTime(), dateInfo.volta_almoco - dateInfo.ida_almoco);
+			formatedInfo.expectedExit = _dateHelpers.formatDate(expectedExit, '#h:#m');
+		} else {
+			formatedInfo.expectedExit = '';
+		}
+
+		return formatedInfo;
+	};
+	
 	function _getRowInfo(date){
 		var dateInfo = _dao.getDateInfo(date);
 		var observation = dateInfo.obs;
