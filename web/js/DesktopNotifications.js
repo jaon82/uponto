@@ -20,6 +20,7 @@ DesktopNotifications.prototype.teste = function(){
  * Baseado em: 	https://developer.mozilla.org/en-US/docs/Web/API/notification
  * 				https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/notifications
  * 				https://developer.mozilla.org/en-US/docs/WebAPI/Using_Web_Notifications
+ * 				http://www.w3.org/TR/notifications/
  */
 DesktopNotifications.prototype.checkPermission = function(){
 	
@@ -64,6 +65,7 @@ DesktopNotifications.prototype.create = function(title,options, url){
 			title = "Controle de Banco de Horas";
 		}
 		var notification = new Notification(title, options);
+		notification.onshow = function() { setTimeout(notification.close, 15000) };
 		if(url != null){
 			clickUrl = url;
 			notification.onclick = notificationClick;

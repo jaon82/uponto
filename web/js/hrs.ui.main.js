@@ -119,6 +119,8 @@ hrs.ui.main = (function($, helpers, dao){
 			
 			url_import+= "?m="+matricula+"&s="+senha+"&e="+empresa+"&mes="+month+"&ano="+year+"&day="+day+"&type=json&di=0";
 				
+			//url_import = "http://localhost/uPonto/testes/fake.php";
+				
 			//alert(url_import);
 			console.log(url_import);
 			
@@ -182,7 +184,8 @@ hrs.ui.main = (function($, helpers, dao){
 									localStorage.getItem(timeRowDate);
 									
 									//Não vai sobrescrever registros que já existem, exceto quado se trata de uma atualização por dia.
-									if(timeRowDate != null && day == dia){
+									if(timeRowDate == null || day == dia){
+										
 										var jsonInfo = {
 											entrada: (!batidas[0])?0:_dateHelpers.parseDateTime(batidas[0], rowDate),
 											ida_almoco: (!batidas[1])?0:_dateHelpers.parseDateTime(batidas[1], rowDate),
@@ -247,11 +250,25 @@ hrs.ui.main = (function($, helpers, dao){
 		var hSaida = saidaEsperada.substring(0,2);
 		var mSaida = saidaEsperada.substring(3,5);
 		var exitDate = new Date(ccY, ccM, ccD, hSaida, mSaida, 0, 0);
-		$("#proxSaidaExtimada").html(saidaEsperada);
-		updateHoraSaida(exitDate);
+		
+		var saida = currDataInfo.saida;
+		var entrada = currDataInfo.entrada;
+		if((saida == null || saida == "undefined" || saida == "") && entrada.length > 0){
+			$("#proxSaidaExtimada").html(saidaEsperada);
+			$("#proxSaidaTimer").css("color","red");
+			var _dateHelpers = hrs.helpers.dateTime;
+			var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
+			var dif2Calc = dif.getTime();
+			updateHoraSaida(exitDate,dif2Calc);
+		} else {
+			$("#proxSaidaTimer").css("color","black");
+			$("#saidaTimeLabel").html("Tempo até saída: ");
+			$("#proxSaidaExtimada").html("-");
+			$("#proxSaidaTimer").html("-");
+		}
 	}
 	
-	function notificationTeste(){
+	function notificationTeste(tempo){
 		
 		var browser = utils.checkbrowser();
 		
@@ -260,7 +277,7 @@ hrs.ui.main = (function($, helpers, dao){
 			
 			var title = "Controle de Banco de Horas";
 			var options = {
-					  body: "Aqui vai o conteúdo da notificação",
+					  body: "Faltam "+tempo+" minuto(s) para sua saída. Fique atento!",
 					  icon: "res/icon.png"
 					};
 			notif.create(title,options,null);
@@ -271,19 +288,75 @@ hrs.ui.main = (function($, helpers, dao){
 		
 	}
 	
-	function updateHoraSaida(exitDate){
+	function updateHoraSaida(exitDate,dif2Calc){
 		//notificationTeste();
 		var curDate = new Date();
 		var _dateHelpers = hrs.helpers.dateTime;
-		var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
-	    var faltaParaSairShow = _dateHelpers.formatDate(dif, '#h:#m:#s');
-	    $("#proxSaidaTimer").html(faltaParaSairShow);
+		
+		
+		if(dif2Calc > 0){
+			$("#saidaTimeLabel").html("Tempo até saída: ");
+			$("#proxSaidaTimer").css("color","red");
+			var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
+			dif2Calc = dif.getTime();
+		} else {
+			$("#saidaTimeLabel").html("Hora extra: ");
+			$("#proxSaidaTimer").css("color","green");
+			var dif = _dateHelpers.getTimeDiff(curDate,exitDate);
+		}
+	    var difTime = dif.getTime();
+		
+	    var teste = new Date(difTime);
+	    var h = dif.getHours();
+	    var m = teste.getMinutes();
+	    var s = teste.getSeconds();
 	    
+	    if(dif2Calc > 0 && parseInt(h) == 0){
+			switch(m){
+			case 30:
+				if(s == 59){
+					notificationTeste(m);
+				}
+				break;
+			case 20:
+				if(s == 59){
+					notificationTeste(m);
+				}
+				break;
+			case 10:
+				if(s == 59){
+					notificationTeste(m);
+				}
+				break;
+			case (5 || 4 || 3 || 2 || 1):
+				if(s == 59){
+					notificationTeste(m);
+				}
+				break;
+			case 0:
+				if(s == 59){
+					notificationTeste(m);
+				}
+				break;
+			}
+	    }
+	    
+	    h = fomartPartTime(h);
+	    m = fomartPartTime(m);
+	    s = fomartPartTime(s);
+	    	
+	    var faltaParaSairShow = h+":"+m+":"+s;
+	    $("#proxSaidaTimer").html(faltaParaSairShow);
+
 	    var t = setTimeout(function(){
-	    	
-	    	updateHoraSaida(exitDate);
-	    	
+	    	updateHoraSaida(exitDate,dif2Calc);
 	    },500);
+	}
+	function fomartPartTime(part){
+		if(part < 10){
+			part = "0"+ part;
+		}
+		return part;
 	}
 
 	

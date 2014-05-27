@@ -61,7 +61,7 @@
 				<div id="proxSaidaExtimada" class="unit information small"></div> 
 			</div>
 			<div class="line last-line">
-				<div class="unit label" style="width: 120px;">Tempo até saída: </div>
+				<div class="unit label" style="width: 120px;" id="saidaTimeLabel">Tempo até saída: </div>
 				<div id="proxSaidaTimer" class="unit information small"></div> 
 			</div>
 			
@@ -302,9 +302,15 @@
 	
 	<div id="perform-update" class="lightbox">
 		<h2>Importação de dados</h2>
-<!-- 		<a href="#close" class="close close-button">x</a> -->
-		
-		<p><img src="res/img/loading.gif"/> Importando dados do sistema Ahgora...</p>
+		<!-- <a href="#close" class="close close-button">x</a> -->
+		<div style="display: table;">
+			<div style="display: table-cell; float: left;">
+				<img src="res/img/loading.gif"/>
+			</div>
+			<div style="display: table-cell; float: left; padding-top: 8px;">
+				Importando dados do sistema Ahgora...
+			</div>
+		</div>
 	</div> 
 	
 	<div id="error-update" class="lightbox">
@@ -329,9 +335,15 @@
 	
 	<div id="sucess-update" class="lightbox">
 		<h2>Importação de dados</h2>
-<!-- 		<a href="#close" class="close close-button">x</a> -->
-		
-		<p><img src="res/img/loading.gif"/> Importação finalizada com sucesso.</p>
+		<!-- <a href="#close" class="close close-button">x</a> -->
+		<div style="display: table;">
+			<div style="display: table-cell; float: left;">
+				<img src="res/img/loading.gif"/>
+			</div>
+			<div style="display: table-cell; float: left; padding-top: 8px;">
+				Importando dados do sistema Ahgora...
+			</div>
+		</div>
 	</div> 
 
 	<ul id="input-context-menu" class="context-menu">
