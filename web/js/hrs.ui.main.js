@@ -23,8 +23,6 @@ hrs.ui.main = (function($, helpers, dao){
 		initNotifications();
 		exportPdf();
 		initNotifTimer();
-		//initImport();
-		//checkPermission();
 		
 		$("#importMonth").click(function(){
 			initImport();
@@ -40,12 +38,7 @@ hrs.ui.main = (function($, helpers, dao){
 			var cDay = fulldate.substr(0,2);
 			var cMonth = fulldate.substr(3,2);
 			cMonth = parseInt(cMonth) - 1;
-			//alert(fulldate);
-			//alert(cMonth);
-			
 			var idImg = "#ref"+dateId;
-			//alert(idImg);
-
 			importAhgora(cMonth,cYear,cDay);
 			
 		});
@@ -512,6 +505,10 @@ hrs.ui.main = (function($, helpers, dao){
 	function importExport(){
 
 		$("#link-export").click(function(){
+			//var data = localStorage;
+			//$.toJSON(data);
+			//console.log(data);
+			//utils.json2csv(data, "Teste", false);
 			$("#output-export").val(dao.exportData())[0].select();
 		});
 

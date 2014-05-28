@@ -21,6 +21,7 @@ DesktopNotifications.prototype.teste = function(){
  * 				https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/notifications
  * 				https://developer.mozilla.org/en-US/docs/WebAPI/Using_Web_Notifications
  * 				http://www.w3.org/TR/notifications/
+ *				http://blog.sourcebender.com/building-an-html5-application-part2.html (Audio)
  */
 DesktopNotifications.prototype.checkPermission = function(){
 	
@@ -66,6 +67,10 @@ DesktopNotifications.prototype.create = function(title,options, url){
 		}
 		var notification = new Notification(title, options);
 		notification.onshow = function() { setTimeout(notification.close, 15000) };
+		
+		// play the alarm sound
+		document.getElementById('alarm-sound').play(); 
+
 		if(url != null){
 			clickUrl = url;
 			notification.onclick = notificationClick;
