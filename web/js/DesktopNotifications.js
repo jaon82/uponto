@@ -66,7 +66,7 @@ DesktopNotifications.prototype.create = function(title,options, url){
 			title = "Controle de Banco de Horas";
 		}
 		var notification = new Notification(title, options);
-		notification.onshow = function() { setTimeout(notification.close, 15000) };
+		//notification.onshow = function() { setTimeout(notification.close, 15000) };
 		
 		// play the alarm sound
 		document.getElementById('alarm-sound').play(); 
