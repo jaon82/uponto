@@ -24,22 +24,17 @@ hrs.ui.month = function(month, year) {
 			observation = dateInfo.holiday.obs;
 		}
 		
-		if(dateInfo.ida_almoco && dateInfo.ida_almoco != "" && dateInfo.ida_almoco != 0 &&  dateInfo.ida_almoco != null &&  dateInfo.ida_almoco != "undefined"){
-			settings = _dao.loadSettings();
-			var tempIdaAlmoco = dateInfo.ida_almoco.getTime()/1000;
-			var tempoAlmoco = settings.lunchTime * 60 * 60;
-			var voltaAlmocoEstimadaTime = (parseInt(tempIdaAlmoco) + parseInt(tempoAlmoco)) * 1000;
-			var voltaAlmocoEstimada = toDate(voltaAlmocoEstimadaTime);
-			
-			//var teste =  _dateHelpers.formatDate(voltaAlmocoEstimada, '#h:#m');
-			//alert(tempIdaAlmoco);
-			//alert(tempoAlmoco);
-			//alert(voltaAlmocoEstimada);
-			//alert(voltaAlmocoEstimada2);
-		} else {
-			var voltaAlmocoEstimada = new Date();
-			var voltaAlmocoEstimadaTime = 0;
-		}
+		settings = _dao.loadSettings();
+		var tempIdaAlmoco = dateInfo.ida_almoco.getTime()/1000;
+		var tempoAlmoco = settings.lunchTime * 60 * 60;
+		var voltaAlmocoEstimadaTime = (parseInt(tempIdaAlmoco) + parseInt(tempoAlmoco)) * 1000;
+		var voltaAlmocoEstimada = toDate(voltaAlmocoEstimadaTime);
+		
+		//var teste =  _dateHelpers.formatDate(voltaAlmocoEstimada, '#h:#m');
+		//alert(tempIdaAlmoco);
+		//alert(tempoAlmoco);
+		//alert(voltaAlmocoEstimada);
+		//alert(voltaAlmocoEstimada2);
 		
 
 		var formatedInfo = {
@@ -50,6 +45,7 @@ hrs.ui.month = function(month, year) {
 			volta_almoco: _dateHelpers.formatDate(dateInfo.volta_almoco, '#h:#m'),
 			volta_almoco_estimada: _dateHelpers.formatDate(voltaAlmocoEstimada, '#h:#m'),
 			volta_almoco_estimada_time: toDate(voltaAlmocoEstimadaTime),
+			//volta_almoco_estimada: voltaAlmocoEstimada,
 
 			saida: _dateHelpers.formatDate(dateInfo.saida, '#h:#m'),
 			vpn: _dateHelpers.formatDate(dateInfo.vpn, '#h:#m'),
