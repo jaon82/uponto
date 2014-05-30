@@ -212,8 +212,10 @@
 					<br/>
 					<a href="#" id="#{data}" class="refreshDay"><img src="res/img/progress.png"/></a> -->
 				</td>
-			    <td style="border-right: 1px solid #ccc; padding: 5px;">
-					<a href="#" id="{data}" class="refreshDay"><img src="res/img/progress.png" id="ref{data}"/></a>
+			    <td style="border-right: 1px solid #ccc; padding: 5px; cursor: pointer;">
+					<a id="{data}" ><!-- class="refreshDay" -->
+						<img src="res/img/progress.png" id="ref{data}" onClick="updateDay('{data}');"/>
+					</a>
 				</td>
 			</tr>
 		</table>

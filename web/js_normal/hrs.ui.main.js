@@ -28,8 +28,11 @@ hrs.ui.main = (function($, helpers, dao){
 			initImport();
 		});
 		
+		/*
 		$(".refreshDay").click(function(){
 			//TODO: Verificar bug neste botão quando muda o mês
+			
+			alert(this);
 			
 			//Realizar a importação/atualização manual de um dia específico
 			var dateId = $(this).attr("id");
@@ -42,12 +45,29 @@ hrs.ui.main = (function($, helpers, dao){
 			importAhgora(cMonth,cYear,cDay);
 			
 		});
+		*/
 		
 		$("#current-month").click(function(){
 			var date = new Date();
 			currentDate.setMonth( date.getMonth());
 			buildMonth();
 		});
+	};
+	
+	window.updateDay = function(dateId){
+		
+		//Realizar a importação/atualização manual de um dia específico
+		//var dateId = $(this).attr("id");
+		var cYear = currentDate.getFullYear();
+		var fulldate = dateId + "/"+cYear;
+		var cDay = fulldate.substr(0,2);
+		var cMonth = fulldate.substr(3,2);
+		cMonth = parseInt(cMonth) - 1;
+		//alert(cMonth);
+		//alert(cDay);
+		//alert(cYear);
+		//var idImg = "#ref"+dateId;
+		importAhgora(cMonth,cYear,cDay);
 	};
 	
 	function initImport(){
@@ -215,7 +235,8 @@ hrs.ui.main = (function($, helpers, dao){
 				closeLightbox("#perform-update");
 				openLightbox("#error-update");
 			}).done(function(){
-				window.location.reload();
+				//window.location.reload();
+				buildMonth();
 			});
 			
 			}//Fim - teste temporário se os dados de login existem
