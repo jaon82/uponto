@@ -191,11 +191,16 @@ hrs.ui.main = (function($, helpers, dao){
 								- Só vai armazenar a importação se não foi uma importação por dia; ou
 								- Se foi uma importação por dia, só vai alterar o dia solicitado.
 								*/
+								
+								
+								day = parseInt(day);
+								dia = parseInt(dia);
+								
 								if(day == 0 || day == dia){
 									var batidas = dados[j].batidas.registros;
 									var timeRowDate = rowDate.getTime();
 									var dayExists = localStorage.getItem(timeRowDate);
-									
+
 									//Não vai sobrescrever registros que já existem, exceto quado se trata de uma atualização por dia.
 									if(dayExists == null || day == dia){
 										
@@ -237,6 +242,7 @@ hrs.ui.main = (function($, helpers, dao){
 			}).done(function(){
 				//window.location.reload();
 				buildMonth();
+				initNotifTimer();
 			});
 			
 			}//Fim - teste temporário se os dados de login existem
@@ -254,7 +260,53 @@ hrs.ui.main = (function($, helpers, dao){
 		notif = new DesktopNotifications();
 	}
 	
+	function checkGeneralTimers(){
+		//checkGeneralTimers(exitDate,dif2Calc);
+		
+		//importAhgora(cMonth,cYear,cDay);
+	}
+	
+	function initGlobalTimers(){
+	
+		var curDate = new Date();
+		var cYear = curDate.getFullYear();
+		var cDay = curDate.getDay();
+		var cMonth = curDate.getMonth();
+		var ccDate = new Date(cYear, cMonth, cDay);
+		var currDataInfo = currentMonth.getRowInfo(ccDate);
+		var entrada = currDataInfo.entrada;
+		
+		var cHour = curDate.getHours();
+		var cMin = curDate.getMinutes();
+		var cSec = curDate.getSeconds();
+		
+
+		//var teste = parseInt(cMin) % 2;
+		if(!entrada || entrada == ""){
+			var condM = (parseInt(cMin) % 1 == 0);
+			var condS = (parseInt(cSec) == 59);
+			//var condS = (parseInt(cSec) > 0);
+			
+			if(parseInt(cHour) > 7 && condM && condS){
+				//var mensagem = "Bom dia! Você já registrou seu ponto hoje?";
+				//notificationGeral(mensagem);
+			}
+		} else 
+		
+		if(cMin == 59 && cSec == 0){
+			importAhgora(cMonth,cYear,cDay);
+		}
+		
+		var t = setTimeout(function(){
+	    	initGlobalTimers();
+	    },500);
+		
+	}
+	
 	function initNotifTimer(){
+		
+		initGlobalTimers();
+	
 		var _dateHelpers = hrs.helpers.dateTime;
 		//1. Busca a hora de saída estimada do dia atual
 		var curDate = new Date();
