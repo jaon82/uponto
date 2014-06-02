@@ -62,7 +62,22 @@ hrs.ui.main = (function($, helpers, dao){
 		var fulldate = dateId + "/"+cYear;
 		var cDay = fulldate.substr(0,2);
 		var cMonth = fulldate.substr(3,2);
-		cMonth = parseInt(cMonth) - 1;
+		var askedMonth = dateId.substr(3,2);
+		//alert(askedMonth);
+		cMonth = parseInt(askedMonth);
+		
+		if(parseInt(cDay) < 11){
+			cMonth = parseInt(askedMonth) - 1;
+		}
+		
+		/*
+		if(parseInt(cDay) >= 31 && parseInt(cDay) >=11 && parseInt(askedMonth) != ){
+			cMonth = parseInt(cMonth);
+		} else {
+			cMonth = parseInt(cMonth) - 1;
+		}
+		*/
+		
 		//alert(cMonth);
 		//alert(cDay);
 		//alert(cYear);
@@ -201,9 +216,14 @@ hrs.ui.main = (function($, helpers, dao){
 									var timeRowDate = rowDate.getTime();
 									var dayExists = localStorage.getItem(timeRowDate);
 
+									//alert(day);
+									//alert(dia);
+									//alert(day == dia);
+									//alert(dayExists);
+
 									//Não vai sobrescrever registros que já existem, exceto quado se trata de uma atualização por dia.
 									if(dayExists == null || day == dia){
-										
+										//alert("teste");
 										var jsonInfo = {
 											entrada: (!batidas[0])?0:_dateHelpers.parseDateTime(batidas[0], rowDate),
 											ida_almoco: (!batidas[1])?0:_dateHelpers.parseDateTime(batidas[1], rowDate),
@@ -215,6 +235,7 @@ hrs.ui.main = (function($, helpers, dao){
 										};
 										
 										dao.storeDate(rowDate, jsonInfo);
+										
 									}
 								}
 								//exit;
