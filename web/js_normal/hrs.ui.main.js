@@ -23,6 +23,7 @@ hrs.ui.main = (function($, helpers, dao){
 		initNotifications();
 		exportPdf();
 		initNotifTimer();
+		initGlobalTimers();
 		
 		$("#importMonth").click(function(){
 			initImport();
@@ -292,8 +293,9 @@ hrs.ui.main = (function($, helpers, dao){
 		var curDate = new Date();
 		var cYear = curDate.getFullYear();
 		var cDay = curDate.getDay();
+		var thisDay = curDate.getDate();
 		var cMonth = curDate.getMonth();
-		var ccDate = new Date(cYear, cMonth, cDay);
+		var ccDate = new Date(cYear, cMonth, thisDay);
 		var currDataInfo = currentMonth.getRowInfo(ccDate);
 		var entrada = currDataInfo.entrada;
 		
@@ -301,21 +303,18 @@ hrs.ui.main = (function($, helpers, dao){
 		var cMin = curDate.getMinutes();
 		var cSec = curDate.getSeconds();
 		
-
-		//var teste = parseInt(cMin) % 2;
 		if(!entrada || entrada == ""){
-			var condM = (parseInt(cMin) % 1 == 0);
-			var condS = (parseInt(cSec) == 59);
-			//var condS = (parseInt(cSec) > 0);
+			var condM = ((parseInt(cMin) % 5) == 0);
+			var condS = (parseInt(cSec) == 0);
 			
 			if(parseInt(cHour) > 7 && condM && condS){
-				//var mensagem = "Bom dia! Você já registrou seu ponto hoje?";
-				//notificationGeral(mensagem);
+				var mensagem = "Bom dia! Você já registrou seu ponto hoje?";
+				notificationGeral(mensagem);
 			}
 		} else 
-		
-		if(cMin == 59 && cSec == 0){
-			importAhgora(cMonth,cYear,cDay);
+
+		if(parseInt(cMin) == 59 && parseInt(cSec) == 0){
+			importAhgora(cMonth,cYear,thisDay);
 		}
 		
 		var t = setTimeout(function(){
