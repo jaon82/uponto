@@ -48,34 +48,11 @@ hrs.ui.main = (function($, helpers, dao){
 		});
 		*/
 		
-		$("#about-button").click(function(e){
-			openLightbox("#about-lightbox");
-		});
-		
 		$("#current-month").click(function(){
 			var date = new Date();
 			currentDate.setMonth( date.getMonth());
 			buildMonth();
 		});
-		
-		$("#revisarPermissoes").click(function(){
-			notif.checkPermissionDirect();
-		});
-		
-		$("#closeSettings").click(function(){
-			//document.getElementById('alarm-sound-tardis').stop();
-			//$('#alarm-sound-tardis').stop();
-		});
-	
-		/*
-		var cBrowser = utils.checkbrowser();
-		if(cBrowser.name == "Chrome"){
-			$("#revogarPermissoes").show();
-		}
-		$("#revogarPermissoes").click(function(){
-			location.href = "chrome://settings/contentExceptions#notifications";
-		});
-		*/
 	};
 	
 	window.updateDay = function(dateId){
@@ -117,9 +94,8 @@ hrs.ui.main = (function($, helpers, dao){
 	}
 	
 	function importAhgora(month,year,day){
-		
+		notif.checkPermission();
 		openLightbox("#perform-update");
-		
 
 		var dia = currentDate.getDate();
 		if(dia > 11){
@@ -334,7 +310,7 @@ hrs.ui.main = (function($, helpers, dao){
 			
 			if(parseInt(cHour) > 7 && condM && condS){
 				var mensagem = "Bom dia! Você já registrou seu ponto hoje?";
-				notificationGeral(mensagem,"default");
+				notificationGeral(mensagem);
 			}
 		} else 
 
@@ -435,7 +411,7 @@ hrs.ui.main = (function($, helpers, dao){
 	}
 	
 	function notificationTeste(tempo){
-		//notif.checkPermissionDirect();
+			
 		var browser = utils.checkbrowser();
 		
 		if(browser.name == "Chrome" || browser.name == "Firefox"){
@@ -454,8 +430,8 @@ hrs.ui.main = (function($, helpers, dao){
 		
 	}
 	
-	function notificationGeral(mensagem,sound){
-		//notif.checkPermissionDirect();
+	function notificationGeral(mensagem){
+		
 		var browser = utils.checkbrowser();
 		
 		if(browser.name == "Chrome" || browser.name == "Firefox"){
@@ -466,7 +442,7 @@ hrs.ui.main = (function($, helpers, dao){
 					  body: mensagem,
 					  icon: "res/icon.png"
 					};
-			notif.create(title,options,null,sound);
+			notif.create(title,options,null);
 			
 		} else {
 			alert("Notificações não implementadas para esta versão do seu browser.");
@@ -504,16 +480,16 @@ hrs.ui.main = (function($, helpers, dao){
 			case (5):
 				if(s == 59){
 					var mensagem = "Faltam "+m+" minuto(s) para encerrar seu horário de almoço! Fique atento.";
-					notificationGeral(mensagem,"five");
+					notificationGeral(mensagem);
 				}
 				break;
 			case 0:
 				if(s == 59){
 					var mensagem = "Falta menos de um minuto minuto(s) para encerrar seu horário de almoço!";
-					notificationGeral(mensagem,"default");
+					notificationGeral(mensagem);
 				} else if(s == 00){
 					var mensagem = "Seu horário de almoço já encerrou! Você deve bater seu ponto imediatamente!!!";
-					notificationGeral(mensagem,"default");
+					notificationGeral(mensagem);
 				}
 				break;
 			}
@@ -521,7 +497,7 @@ hrs.ui.main = (function($, helpers, dao){
 		
 			if(m > 0 && s == 00){
 				var mensagem = "Seu horário de almoço já encerrou! Você deve bater seu ponto imediatamente!!!";
-				notificationGeral(mensagem,"default");
+				notificationGeral(mensagem);
 			}
 		}
 	    
@@ -562,37 +538,24 @@ hrs.ui.main = (function($, helpers, dao){
 	    
 	    if(dif2Calc > 0 && parseInt(h) == 0){
 			switch(m){
-			case 30:
+			case 10:
 				if(s == 59){
-					//notificationTeste(m);
-					var mensagem = "Faltam "+m+" minuto(s) para sua saída. Fique atento!";
-					notificationGeral(mensagem,"default");
+					notificationTeste(m);
 				}
 				break;
 			case 20:
 				if(s == 59){
-					//notificationTeste(m);
-					var mensagem = "Faltam "+m+" minuto(s) para sua saída. Fique atento!";
-					notificationGeral(mensagem,"default");
+					notificationTeste(m);
 				}
 				break;
 			case 10:
 				if(s == 59){
-					var mensagem = "Faltam "+m+" minuto(s) para sua saída. Fique atento!";
-					notificationGeral(mensagem,"ten");
-					//notificationTeste(m);
+					notificationTeste(m);
 				}
 				break;
-			case 5:
+			case (5 || 4 || 3 || 2 || 1):
 				if(s == 59){
-					if(m == 5){					
-						var mensagem = "Faltam "+m+" minuto(s) para sua saída. Fique atento!";
-						notificationGeral(mensagem,"five");
-					} else {
-						//notificationTeste(m);
-						var mensagem = "Faltam "+m+" minuto(s) para sua saída. Fique atento!";
-						notificationGeral(mensagem,"chimes");
-					}
+					notificationTeste(m);
 				}
 				break;
 			case 0:

@@ -60,21 +60,7 @@ DesktopNotifications.prototype.checkPermission = function(){
 	return result;
 };
 
-DesktopNotifications.prototype.checkPermissionDirect = function(){
-	var result = this.checkPermission();
-	if(!result.isOK){
-		alert(result.msg);
-	} else {
-		var title = "Controle de Banco de Horas";
-		var options = {
-				  body: result.msg,
-				  icon: "res/icon.png"
-				};
-		this.create(title,options,null,"tardis");
-	}
-};
-
-DesktopNotifications.prototype.create = function(title,options,url,sound){
+DesktopNotifications.prototype.create = function(title,options, url){
 	if(permission.isOK){
 		if(title == null){
 			title = "Controle de Banco de Horas";
@@ -82,28 +68,8 @@ DesktopNotifications.prototype.create = function(title,options,url,sound){
 		var notification = new Notification(title, options);
 		//notification.onshow = function() { setTimeout(notification.close, 15000) };
 		
-		if(sound.length > 0){
-			if(sound == "default"){
-				document.getElementById('alarm-sound').play(); 
-			} else {
-				switch(sound){
-					case "five":
-						document.getElementById('alarm-sound-five').play();
-						break;
-					case "ten":
-						document.getElementById('alarm-sound-ten').play();
-						break;
-					case "chimes":
-						document.getElementById('alarm-sound-chimes').play(); 
-						break;
-					default:
-						document.getElementById('alarm-sound-tardis').play();
-						break;						
-				}
-			}
-			// play the alarm sound
-			//document.getElementById('alarm-sound').play(); 
-		}
+		// play the alarm sound
+		document.getElementById('alarm-sound').play(); 
 
 		if(url != null){
 			clickUrl = url;
@@ -121,10 +87,5 @@ function notificationClick(){
 	if(clickUrl != null){
 		window.open(clickUrl);
 	}
-}
-
-function updateSource(source, src) {
-    var source = $(source);
-    source.attr('src', src).appendTo(source.parent());
 }
 
