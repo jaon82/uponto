@@ -114,9 +114,18 @@ h2{
 	-webkit-transition: all .4s linear;
 }
 
-.date{width:103px;}
+.date{width:98px;}
 .day_date{width:52px;}
 .day_week{width:50px;}
+.begin-dayT{width:75px;}
+.start-lunchT{width:70px;}
+.end-lunchT{width:87px;}
+.end-dayT{width:71px;}
+.all-workedT{width:57px;}
+.lunchT{width:53px;}
+.extraT{width:68px;}
+.noteT{width:92px;}
+.is-ausentT{width:57px;}
 
 .begin-day{width:78px;}
 .start-lunch{width:73px;}
@@ -127,6 +136,7 @@ h2{
 .lunch{width:57px;}
 .extra{width:73px;}
 .note{width:35px;}
+.note2{width:35px;}
 .is-ausent{width:85px;}
 
 #fixed-bar li a:hover{background:#525252;}

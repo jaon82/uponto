@@ -31,16 +31,16 @@
 	<div id="fixed-bar">
 		<ul id="header">
 			<li class="date">Dia</li>
-			<li class="begin-day">Entrada</li>
-			<li class="start-lunch">Ida almoço</li>
-			<li class="end-lunch">Volta almoço</li>
-			<li class="end-day">Saída</li>
-			<li class="vpn-cell">Remoto</li>
-			<li class="all-worked">Total</li>
-			<li class="lunch">Almoço</li>
-			<li class="extra">Extra</li>
-			<li class="note">Obs</li>
-			<li class="is-ausent">Ausente</li>
+			<li class="begin-dayT">Entrada</li>
+			<li class="start-lunchT">Ida almoço</li>
+			<li class="end-lunchT">Volta almoço</li>
+			<li class="end-dayT">Saída</li>
+			<li class="vpn-cell">Extra</li>
+			<li class="all-workedT">Total</li>
+			<li class="lunchT">Almoço</li>
+			<li class="extraT">B.H.<li>
+			<li class="is-ausentT">Ausente</li>
+			<li class="noteT">Opções</li>
 		</ul>
 
 		<ul id="menu">
@@ -191,6 +191,7 @@
 				<th>Almoço</th>
 				<th>Extra</th>
 				<th>Obs</th>
+				<th>OPTO</th>
 				<th class="is-ausent" colspan="2">Ausente</th>
 			</tr>
 			<tr id="row-template" class="fixed-row">
@@ -204,18 +205,21 @@
 				<td class="total all-worked">{total}</td>
 				<td class="almoco lunch">{almoco}</td>
 				<td class="excedente extra">{excedente}</td>
+				<td>
+					<input type="checkbox" value="S" class="ausent" {checked} />
+				</td>
 				<td class="obs_cell note">
 					<div class="obs">{obs}</div>
 					<a href="#view-full-obs" class="view-full-obs {cssObsPreenchida}" title="{obs}"></a>
 				</td>
-				<td>
-					<input type="checkbox" value="S" class="ausent" {checked} /><!--
-					<br/>
-					<a href="#" id="#{data}" class="refreshDay"><img src="res/img/progress.png"/></a> -->
-				</td>
 			    <td style="border-right: 1px solid #ccc; padding: 5px; cursor: pointer;">
-					<a id="{data}" ><!-- class="refreshDay" -->
-						<img src="res/img/progress.png" id="ref{data}" onClick="updateDay('{data}');"/>
+					<a id="{data}" >
+						<img src="res/img/oponto.png" id="ref{data}" onClick="opontoCalcs('{data}');" title="Informações para OPONTO"/>
+					</a>
+				</td>
+				<td style="border-right: 1px solid #ccc; padding: 5px; cursor: pointer;">
+					<a id="{data}" >
+						<img src="res/img/progress.png" id="ref{data}" onClick="updateDay('{data}');" title="Atualizar/Importar este dia"/>
 					</a>
 				</td>
 			</tr>
