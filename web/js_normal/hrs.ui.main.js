@@ -90,9 +90,10 @@ hrs.ui.main = (function($, helpers, dao){
 		//alert(askedMonth);
 		cMonth = parseInt(askedMonth);
 		
-		if(parseInt(cDay) < 11){
+		//if(parseInt(cDay) < 11){
+			//TODO: Verificar direito o fucionamento disso com a pessagem dos meses.
 			cMonth = parseInt(askedMonth) - 1;
-		}
+		//}
 		
 		/*
 		if(parseInt(cDay) >= 31 && parseInt(cDay) >=11 && parseInt(askedMonth) != ){
