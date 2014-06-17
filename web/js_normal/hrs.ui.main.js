@@ -93,6 +93,7 @@ hrs.ui.main = (function($, helpers, dao){
 		//if(parseInt(cDay) < 11){
 			//TODO: Verificar direito o fucionamento disso com a pessagem dos meses.
 			cMonth = parseInt(askedMonth) - 1;
+			alert(cMonth);
 		//}
 		
 		/*
@@ -329,6 +330,7 @@ hrs.ui.main = (function($, helpers, dao){
 		var cMin = curDate.getMinutes();
 		var cSec = curDate.getSeconds();
 		
+		/*
 		if(!entrada || entrada == ""){
 			var condM = ((parseInt(cMin) % 5) == 0);
 			var condS = (parseInt(cSec) == 0);
@@ -338,7 +340,7 @@ hrs.ui.main = (function($, helpers, dao){
 				notificationGeral(mensagem,"default");
 			}
 		} else 
-
+		*/
 		if(parseInt(cMin) == 59 && parseInt(cSec) == 0){
 			importAhgora(cMonth,cYear,thisDay);
 		}
