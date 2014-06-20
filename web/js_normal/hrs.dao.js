@@ -124,29 +124,6 @@ hrs.dao = (function($, helpers){
 		localStorage.setItem(dateTime.getTime(), $.toJSON(data));
 	};
 	
-	/**
-	 * Stores the import date and import flag of a given month/year
-	 * @author Eder Martins Franco
-	 * @since 1.5
-	 */
-	public.setAhgoraLog = function(monthYear,imported,importDate){
-		var dataToStore;
-		dataToStore.monthYear = monthYear;
-		dataToStore.imported = alreadySync;
-		dataToStore.importDate = importDate;
-		localStorage.setItem(monthYear, $.toJSON(dataToStore));
-	}
-	
-	/**
-	 * Recover the import date and import flag of a given month/year
-	 * @author Eder Martins Franco
-	 * @since 1.5
-	 */
-	public.getAgoraLog = function(monthYear){
-		var info = $.evalJSON(localStorage.getItem(monthYear));
-		return info;
-	}
-	
 	public.saveSettings = function(newSettings){ 
 		settings = newSettings;
 		localStorage.setItem(SETTINGS_KEY, $.toJSON(newSettings)); 

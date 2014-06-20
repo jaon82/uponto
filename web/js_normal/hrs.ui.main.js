@@ -138,7 +138,6 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		
 		//1. Verificar se já houve importação do mês e ano desejado
-		//var info = dao.getAgoraLog(monthYear);
 		var _helpers = hrs.helpers,
 		_dateHelpers = hrs.helpers.dateTime;
 		
@@ -279,7 +278,6 @@ hrs.ui.main = (function($, helpers, dao){
 				}
 				//TODO: Ainda não setei a flag do status da atualização já ter ocorrido
 				//var dataAtual = new Date();
-				//dao.setAhgoraLog(monthYear2,1,dataAtual);
 				
 				//Fecha lightbox
 				closeLightbox("#perform-update");

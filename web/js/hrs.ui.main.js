@@ -30,25 +30,6 @@ hrs.ui.main = (function($, helpers, dao){
 			initImport();
 		});
 		
-		/*
-		$(".refreshDay").click(function(){
-			//TODO: Verificar bug neste botão quando muda o mês
-			
-			alert(this);
-			
-			//Realizar a importação/atualização manual de um dia específico
-			var dateId = $(this).attr("id");
-			var cYear = currentDate.getFullYear();
-			var fulldate = dateId + "/"+cYear;
-			var cDay = fulldate.substr(0,2);
-			var cMonth = fulldate.substr(3,2);
-			cMonth = parseInt(cMonth) - 1;
-			var idImg = "#ref"+dateId;
-			importAhgora(cMonth,cYear,cDay);
-			
-		});
-		*/
-		
 		$("#about-button").click(function(e){
 			openLightbox("#about-lightbox");
 		});
@@ -77,6 +58,29 @@ hrs.ui.main = (function($, helpers, dao){
 			location.href = "chrome://settings/contentExceptions#notifications";
 		});
 		*/
+		
+		$("#permAhgora").click(function(){
+			
+			var check = $(this).is(":checked");
+			if(check){
+				$("#showAhgora").fadeIn();
+			} else {
+				$("#showAhgora").fadeOut();
+			}
+			
+		});
+		
+		$("#permNotif").click(function(){
+			
+			var check = $(this).is(":checked");
+			if(check){
+				$("#showNotif").fadeIn();
+			} else {
+				$("#showNotif").fadeOut();
+			}
+			
+		});
+			
 	};
 	
 	window.updateDay = function(dateId){
@@ -133,7 +137,7 @@ hrs.ui.main = (function($, helpers, dao){
 			month = "0"+month;
 		}
 		
-		alert(month);
+		//alert(month);
 		//}
 		//var monthYear = month+"-"+year;
 				
@@ -141,7 +145,6 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		
 		//1. Verificar se já houve importação do mês e ano desejado
-		//var info = dao.getAgoraLog(monthYear);
 		var _helpers = hrs.helpers,
 		_dateHelpers = hrs.helpers.dateTime;
 		
@@ -282,7 +285,6 @@ hrs.ui.main = (function($, helpers, dao){
 				}
 				//TODO: Ainda não setei a flag do status da atualização já ter ocorrido
 				//var dataAtual = new Date();
-				//dao.setAhgoraLog(monthYear2,1,dataAtual);
 				
 				//Fecha lightbox
 				closeLightbox("#perform-update");
@@ -693,6 +695,31 @@ hrs.ui.main = (function($, helpers, dao){
 		$("#lunch-time").val(settings.lunchTime).change(saveSettings);
 		$("#initial-balance").val(settings.initialBalance).change(saveSettings);
 		
+		if(settings.permAhgora == 1){
+			$("#permAhgora").attr("checked","checked");
+			$("#showAhgora").fadeIn();
+		} else {
+			$("#permAhgora").removeAttr("checked");
+			$("#showAhgora").fadeOut();
+		}
+		$("#permAhgora").change(saveSettings);
+		
+		if(settings.permNotif == 1){
+			$("#permNotif").attr("checked","checked");
+			$("#showNotif").fadeIn();
+		} else {
+			$("#permNotif").removeAttr("checked");
+			$("#showNotif").fadeOut();
+		}
+		$("#permNotif").change(saveSettings);
+		
+//		if(settings.permOponto == 1){
+//			$("#permOponto").attr("checked","checked");
+//		} else {
+//			$("#permOponto").removeAttr("checked");
+//		}
+//		$("#permOponto").change(saveSettings);
+		
 		$("#matricula").val(settings.matricula).change(saveSettings);
 		$("#senha").val(settings.senha).change(saveSettings);
 		$("#empresa").val(settings.empresa).change(saveSettings);
@@ -738,11 +765,23 @@ hrs.ui.main = (function($, helpers, dao){
 		$("input.utilDay:checked").each(function(){
 			utilDaysChecked.push(this.value);
 		});
+		
+		var permAhgora = $("#permAhgora").is(":checked");
+		permAhgora = (permAhgora)?1:0;
+		
+		var permNotif = $("#permNotif").is(":checked");
+		permNotif = (permNotif)?1:0;
+		
+		//var permOponto = $("#permOponto").is(":checked");
+		//permOponto = (permOponto)?1:0;
 
 		dao.saveSettings({
 			'totalWork': $("#total-work").val(),
 			'lunchTime': $("#lunch-time").val(),
 			'initialBalance': $("#initial-balance").val(),
+			'permAhgora': permAhgora,
+			'permNotif': permNotif,
+			//'permOponto': permOponto,
 			'matricula': $("#matricula").val(),
 			'senha': $("#senha").val(),
 			'empresa': $("#empresa").val(),

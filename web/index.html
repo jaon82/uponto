@@ -237,7 +237,7 @@
 	<input type="file" id="inputfile-import-data" name="arquivos" />
 
 	<div id="configuration" class="lightbox">
-		<a href="#close" class="close close-button">x</a>
+		<a href="#close" class="close close-button" id="closeSettings">x</a>
 		
 		<h2>Configurações</h2>
 		
@@ -259,9 +259,11 @@
 		<div class="line"> 
 			<input type="checkbox" class="utilDay" value="1" id="permNotif"/> Utilizar Notificações
 		</div>
+		<!--  
 		<div class="line"> 
 			<input type="checkbox" class="utilDay" value="1" id="permOponto"/> Integrar com sistema OPONTO
 		</div>
+		-->
 		<br/>
 		<div class="line utilDays"> 
 			<label class="unit size1of3"><strong>Dias com expediente:</strong></label>
@@ -299,12 +301,12 @@
 			<div class="line"> 
 				<input type="button" id="revisarPermissoes" value="Checar Permissões" />
 			</div>
-			
-			<div class="center">
-				<input type="button" class="close" value="Fechar" id="closeSettings" />
-			</div>
 		</div>
-		
+		<!--
+		<div class="center">
+			<input type="button" class="close" value="Fechar" id="closeSettings" />
+		</div>
+		-->
 	</div>
 	
 	<div id="holidays" class="lightbox">
