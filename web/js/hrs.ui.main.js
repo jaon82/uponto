@@ -8,6 +8,7 @@ hrs.ui.main = (function($, helpers, dao){
 	var currentDate = null,
 		currentMonth = null,
 		notif = null,
+		ahgora = null,
 		$container = null,
 		lightboxIndex = 3;
 	
@@ -45,8 +46,7 @@ hrs.ui.main = (function($, helpers, dao){
 		});
 		
 		$("#closeSettings").click(function(){
-			//document.getElementById('alarm-sound-tardis').stop();
-			//$('#alarm-sound-tardis').stop();
+			window.location.reload();
 		});
 	
 		/*
@@ -67,7 +67,7 @@ hrs.ui.main = (function($, helpers, dao){
 			} else {
 				$("#showAhgora").fadeOut();
 			}
-			
+			initAhgora();
 		});
 		
 		$("#permNotif").click(function(){
@@ -83,16 +83,15 @@ hrs.ui.main = (function($, helpers, dao){
 			
 	};
 	
+	/**
+	 * Realizar a importação/atualização manual de um dia específico
+	 */
 	window.updateDay = function(dateId){
-		
-		//Realizar a importação/atualização manual de um dia específico
-		//var dateId = $(this).attr("id");
 		var cYear = currentDate.getFullYear();
 		var fulldate = dateId + "/"+cYear;
 		var cDay = fulldate.substr(0,2);
 		var cMonth = fulldate.substr(3,2);
 		var askedMonth = dateId.substr(3,2);
-		//alert(askedMonth);
 		cMonth = parseInt(askedMonth);
 		
 		//TODO: Verificar direito o fucionamento disso com a pessagem dos meses.
@@ -101,209 +100,51 @@ hrs.ui.main = (function($, helpers, dao){
 		} else {
 			cMonth = parseInt(askedMonth);
 		}
-	
-		importAhgora(cMonth,cYear,cDay);
+		//importAhgora(cMonth,cYear,cDay);
+		ahgora.import(cMonth, cYear, cDay);
 	};
 	
 	function initAhgora(){
 		
-		ahgora = new Ahgora();
+		//Busca e seta as configurações
+		var set = dao.loadSettings();
+		
+		//1. Verifica se a importação está ativa
+		if(set.permAhgora == 1){
+			var matricula = set.matricula;
+			var senha = set.senha;
+			var empresa = set.empresa;
+			
+			if(empresa.length == 0){
+				empresa = null;
+			}
+			
+			if(senha.length == 0){
+				senha = null;
+			}
+			
+			if(matricula.length == 0){
+				matricula = null;
+			}
+			
+			if(matricula == null || senha == null || empresa == null){
+				var msg = "Informe sua Matrícula, Senha e Empresa nas Configurações antes de realizar a importação.";
+				$("#msg-lightbox-content").html(msg);
+				closeLightbox("#perform-update");
+				openLightbox("#msg-lightbox");
+			} else {
+				ahgora = new Ahgora(matricula,senha,empresa,helpers,dao,openLightbox,closeLightbox,buildMonth,initNotifTimer);
+			}
+		} else {
+			ahgora = null;
+		}
 	}
 	
 	function initImport(){
 		currentMonth = new hrs.ui.month(currentDate.getMonth(), currentDate.getFullYear());
 		var cMonth = currentDate.getMonth();
 		var cYear = currentDate.getFullYear();
-		importAhgora(cMonth,cYear,null);
-	}
-	
-	function importAhgora(month,year,day){
-		
-		openLightbox("#perform-update");
-
-		var dia = currentDate.getDate();
-		if(day == null && dia > 11){
-			month = parseInt(month) + 1;
-		} 
-		
-		//month = month.toString();
-		//if(month.length == 1){
-		month = parseInt(month);
-		if(month == 0){
-			month = 1;
-		}
-		
-		if(parseInt(month) < 10){
-			month = "0"+month;
-		}
-		
-		//alert(month);
-		//}
-		//var monthYear = month+"-"+year;
-				
-		var url_import = "http://khi.by/projetos/pontoconn/";
-		
-		
-		//1. Verificar se já houve importação do mês e ano desejado
-		var _helpers = hrs.helpers,
-		_dateHelpers = hrs.helpers.dateTime;
-		
-		//Se não foi importado ainda, realiza a importação
-		//if(info == null || info.imported == 0){
-			
-			//Pega as configurações
-			var set = dao.loadSettings();
-			var matricula = set.matricula;
-			var senha = set.senha;
-			var empresa = set.empresa;
-			if(day == null){
-				day = 0;
-			}
-			
-			if(matricula == null || senha == null || empresa == null){
-				//console.log("Informe Matricula, Senha e Empresa nas configuracoes para realizar a importacao.");
-				//console.log("Importação falhou.");
-				var msg = "Informe sua Matrícula, Senha e Empresa nas Configurações antes de realizar a importação.";
-				$("#msg-lightbox-content").html(msg);
-				closeLightbox("#perform-update");
-				openLightbox("#msg-lightbox");
-				
-			} else {
-			//TODO: remover isso depois que for criado o cache na API
-			//alert(month);
-			//if(day > 0 && day <=15){
-				//month = parseInt(month) -1;
-				//month = "0"+month;
-			//}
-			
-			//alert(day);
-			//alert(month);
-			
-			url_import+= "?m="+matricula+"&s="+senha+"&e="+empresa+"&mes="+month+"&ano="+year+"&day="+day+"&type=json&di=0";
-				
-			//url_import = "http://localhost/uPonto/testes/fake.php";
-				
-			//alert(url_import);
-			console.log(url_import);
-			
-			$.get(url_import, function( resposta, statusText, xhr) {
-				
-				if(xhr.status != 200){
-					closeLightbox("#perform-update");
-					openLightbox("#error-update");
-					
-				} else if(resposta){//Se retornou algo da API
-					
-					var dados;
-					var monthYear2;
-					for(var i = 0; i <= resposta.length; i++){
-						dados = resposta[i];
-						
-						for(var j in dados){
-							
-							var texto = dados[j].batidas.texto;
-							
-							//Somente criar registro para o banco de dados SE houve batidas no dia
-							if(texto.length > 0){
-								
-								var data = dados[j].data;
-								var dia = data.substr(0,2);
-								var mes = data.substr(3,2);
-								var ano = data.substr(6,4);
-								
-								//monthYear2 = mes+"-"+ano;
-								
-								if(dia < 10){
-									dia = dia.substr(1,1);
-								}
-								
-								if(mes < 10){
-									mes = mes.substr(1,1);
-								}
-								mes = parseInt(mes) - 1;
-								
-								var rowDate = new Date(ano, mes, dia);
-								var curDate = new Date();
-								var ccM = curDate.getMonth();
-								var ccY = curDate.getFullYear();
-								var ccD = curDate.getDate();
-								var ccDate = new Date(ccY, ccM, ccD);
-								//var dif = _dateHelpers.getTimeDiff(ccDate,rowDate);
-								//var intDif = parseInt(dif);
-								
-								//alert("Linha atual - "  + rowDate);
-								//alert("Hoje - "  + curDate);
-								//alert("Dif"  + dif);
-								//alert(intDif);
-								
-								/*
-								- Só vai armazenar a importação se não foi uma importação por dia; ou
-								- Se foi uma importação por dia, só vai alterar o dia solicitado.
-								*/
-								
-								
-								day = parseInt(day);
-								dia = parseInt(dia);
-								
-								if(day == 0 || day == dia){
-									var batidas = dados[j].batidas.registros;
-									var timeRowDate = rowDate.getTime();
-									var dayExists = localStorage.getItem(timeRowDate);
-
-									//alert(day);
-									//alert(dia);
-									//alert(day == dia);
-									//alert(dayExists);
-
-									//Não vai sobrescrever registros que já existem, exceto quado se trata de uma atualização por dia.
-									if(dayExists == null || day == dia){
-										//alert("teste");
-										var jsonInfo = {
-											entrada: (!batidas[0])?0:_dateHelpers.parseDateTime(batidas[0], rowDate),
-											ida_almoco: (!batidas[1])?0:_dateHelpers.parseDateTime(batidas[1], rowDate),
-											volta_almoco: (!batidas[2])?0:_dateHelpers.parseDateTime(batidas[2], rowDate),
-											saida: (!batidas[3])?0:_dateHelpers.parseDateTime(batidas[3], rowDate),
-											vpn: 0,
-											obs: "Batidas originais: "+texto,
-											ausent: false
-										};
-										
-										dao.storeDate(rowDate, jsonInfo);
-										
-									}
-								}
-								//exit;
-							}
-							
-						}
-					}
-					
-				} else {
-					//console.log("Importação falhou.");
-					closeLightbox("#perform-update");
-					openLightbox("#error-update");
-				}
-				//TODO: Ainda não setei a flag do status da atualização já ter ocorrido
-				//var dataAtual = new Date();
-				
-				//Fecha lightbox
-				closeLightbox("#perform-update");
-				
-			}, "json").fail(function() {
-				
-				closeLightbox("#perform-update");
-				openLightbox("#error-update");
-			}).done(function(){
-				//window.location.reload();
-				buildMonth();
-				initNotifTimer();
-			});
-			
-			}//Fim - teste temporário se os dados de login existem
-			
-	
-		//}
-		
+		ahgora.import(cMonth, cYear, null);
 	}
 	
 	function testeNot(){
@@ -635,14 +476,10 @@ hrs.ui.main = (function($, helpers, dao){
 		currentMonth.setDao(dao);
 		currentMonth.setUpdatedRowCallback(updateInfo);
 		currentMonth.print($container);
-		
-		//initImport();
-		
 		$("#main-table tr").each(function(){
 			var $row = $(this);
 			formatValue($row.find('.total, .excedente'), $row.find('.excedente').html());
 		});
-		
 		updateInfo();
 	}
 	
@@ -698,9 +535,15 @@ hrs.ui.main = (function($, helpers, dao){
 		if(settings.permAhgora == 1){
 			$("#permAhgora").attr("checked","checked");
 			$("#showAhgora").fadeIn();
+			$(".btImportMonth").show();
+			$(".upDayOn").show();
+			$(".upDayOff").hide();
 		} else {
 			$("#permAhgora").removeAttr("checked");
 			$("#showAhgora").fadeOut();
+			$(".btImportMonth").hide();
+			$(".upDayOn").hide();
+			$(".upDayOff").show();
 		}
 		$("#permAhgora").change(saveSettings);
 		

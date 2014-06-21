@@ -409,3 +409,7 @@ h2{
 .showNotif {
 	display: none;
 }
+
+.hiddenObj {
+	display: none;	
+}
