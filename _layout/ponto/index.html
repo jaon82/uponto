@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-language" content="pt-br" />
+
+    <title>Controle de Banco de Horas</title>
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script src="assets/js/live.js"></script>
+</head>
+<body>
+    <header class="top cf">
+        <ul class="table-header cf">
+            <li data-labelfor="1">Dia</li>
+            <li data-labelfor="2">Entrada</li>
+            <li data-labelfor="3">Ida almoço</li>
+            <li data-labelfor="4">Volta almoço</li>
+            <li data-labelfor="5">Saída</li>
+            <li data-labelfor="6">Extra</li>
+            <li data-labelfor="7">Total</li>
+            <li data-labelfor="8">Almoço</li>
+            <li data-labelfor="9" title="Banco de Horas">B.H.</li>
+            <li data-labelfor="10" title="Ausente">Ausente</li>
+            <li data-labelfor="11">Opções</li>
+        </ul>
+
+        <nav class="top-nav" role="navigation">
+            <ul class="top-nav-menu">
+                <li>
+                    <a href="#">Opções</a>
+                    <ul>
+                        <li><a data-modal="holidays" href="#holidays">Feriados</a></li>
+                        <li><a href="">Importar</a></li>
+                        <li><a data-modal="export" href="#export">Exportar</a></li>
+                        <li><a data-modal="settings" href="#settings">Configurações</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a data-modal="about" href="#about">Sobre</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content cf">
+        <div class="fl">
+            <table class="table-date">
+                <tr class="weekend">
+                    <td data-labelby="1">01/06</td>
+                    <td data-labelby="1">dom</td>
+                    <td data-labelby="2" width="90"><input type="time" /></td>
+                    <td data-labelby="3" width="90"><input type="time" /></td>
+                    <td data-labelby="4" width="90"><input type="time" /></td>
+                    <td data-labelby="5" width="90"><input type="time" /></td>
+                    <td data-labelby="6" width="90"><input type="time" /></td>
+                    <td data-labelby="7">00:00</td>
+                    <td data-labelby="8">00:00</td>
+                    <td data-labelby="9">00:00</td>
+                    <td data-labelby="10"><input type="checkbox"></td>
+                    <td data-labelby="11">
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>02/06</td>
+                    <td>seg</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>03/06</td>
+                    <td>ter</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>04/06</td>
+                    <td>qua</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>05/06</td>
+                    <td>qui</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>06/06</td>
+                    <td>sex</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>07/06</td>
+                    <td>sab</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>08/06</td>
+                    <td>dom</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>09/06</td>
+                    <td>seg</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>10/06</td>
+                    <td>ter</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>11/06</td>
+                    <td>qua</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>12/06</td>
+                    <td>qui</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>13/06</td>
+                    <td>sex</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>14/06</td>
+                    <td>sab</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>15/06</td>
+                    <td>dom</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>16/06</td>
+                    <td>seg</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>17/06</td>
+                    <td>ter</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="holiday">
+                    <td>18/06</td>
+                    <td>qua</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="holiday">
+                    <td>19/06</td>
+                    <td>qui</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>20/06</td>
+                    <td>sex</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>21/06</td>
+                    <td>sab</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>22/06</td>
+                    <td>dom</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>23/06</td>
+                    <td>seg</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>24/06</td>
+                    <td>ter</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>25/06</td>
+                    <td>qua</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>26/06</td>
+                    <td>qui</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>27/06</td>
+                    <td>sex</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>28/06</td>
+                    <td>sab</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr class="weekend">
+                    <td>29/06</td>
+                    <td>dom</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>30/06</td>
+                    <td>seg</td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td><input type="time" /></td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td>00:00</td>
+                    <td><input type="checkbox"></td>
+                    <td>
+                        <ul class="table-date-options">
+                            <li><a class="sprite icon-clockout" data-modal="editable" title="Anotações" href="#editable"></a></li>
+                            <li><a class="sprite icon-oponto" title="Registrar ocorrência n'Oponto" href=""></a></li>
+                            <li><a class="sprite icon-refresh" data-loading title="Atualizar dia" href="#update"></a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <aside class="fr">
+            <button class="btn btn-now">Ver mês atual</button>
+
+            <div class="btns">
+                <button class="btn btn-prev">Ver mês anterior (Maio)</button>
+                <button class="btn btn-next">Ver próximo mês (Julho)</button>
+            </div>
+
+            <button class="btn btn-import">Importar mês atual (Junho/2014 - Via Ahgora)</button>
+
+            <hr />
+
+            <h4>Legenda</h4>
+
+            <ul class="color-labels">
+                <li class="weekday">
+                    <span class="label"></span>
+                    Dia útil
+                </li>
+                <li class="weekend">
+                    <span class="label"></span>
+                    Final de Semana
+                </li>
+                <li class="holiday">
+                    <span class="label"></span>
+                    Feriado
+                </li>
+            </ul>
+
+            <hr />
+
+            <h1 class="text-center">Expediente do Dia</h1>
+
+            <div class="aside-info">
+                <div class="aside-info-label">Saída estimada:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+
+            <div class="aside-info">
+                <div class="aside-info-label">Tempo até saída:</div>
+                <div class="aside-info-time text-danger">00:00:00</div>
+            </div>
+
+            <hr />
+
+            <h4 class="text-center">Intervalo</h4>
+
+            <div class="aside-info">
+                <div class="aside-info-label">Saída estimada:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Saída real:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Retorno estimado:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Retorno real:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Tempo de atraso:</div>
+                <div class="aside-info-time text-danger">00:00:00</div>
+            </div>
+
+            <hr />
+
+            <h1 class="text-center">Informações Gerais</h1>
+
+            <div class="aside-info">
+                <div class="aside-info-label">Mês atual:</div>
+                <div class="aside-info-time">Junho / 2014</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Horas extras consolidadas:</div>
+                <div class="aside-info-time text-success">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Horas extras do mês:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+
+            <hr />
+
+            <h1 class="text-center">Informações Adicionais</h1>
+
+            <div class="aside-info">
+                <div class="aside-info-label">Horário médio de entrada:</div>
+                <div class="aside-info-time">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Horas médio de saída:</div>
+                <div class="aside-info-time text-success">00:00</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Dias devendo:</div>
+                <div class="aside-info-time text-danger">-1</div>
+            </div>
+            <div class="aside-info">
+                <div class="aside-info-label">Dias ausentes:</div>
+                <div class="aside-info-time">0</div>
+            </div>
+        </aside>
+    </section>
+
+    <div class="modal" data-modal-id="about">
+        <div class="modal-mask"></div>
+        <a class="modal-close sprite" data-close-modal-id="about" title="Fechar" href="#"></a>
+
+        <div class="modal-content">
+            <h3>Sobre</h3>
+
+            <p>Este aplicativo foi baseado no projeto de Renato Menegasso de um App do Google Chrome para controle de horas de trabalho.</p>
+
+            <p>O projeto original pode ser encontrado em: <a href="https://github.com/renatomenegasso/Controle-ponto">https://github.com/renatomenegasso/Controle-ponto</a></p>
+
+            <p>A extensão original está publicada na Chrome Webstore em: <a href="https://chrome.google.com/webstore/detail/controle-de-banco-de-hora/pfifkcaekcnananahibcebeeknnlfhna?utm_source=chrome-ntp-icon"> https://chrome.google.com/webstore/detail/controle-de-banco-de-hora/pfifkcaekcnananahibcebeeknnlfhna?utm_source=chrome-ntp-icon</a></p>
+
+            <h4>Sobre esta versão</h4>
+
+            <p>v1.10: - Foram implementadas notificações para desktop, diversas melhorias nos cálculos de horários de entrada e saída, integração com o sistema Ahgora e etc.</p>
+
+            <h5>Desenvolvedores:</h5>
+
+            <ul>
+                <li>Eder Franco (efranco23@gmail.com)</li>
+            </ul>
+
+            <h5>Grupo de Testes:</h5>
+
+            <ul>
+                <li>Jean Alisson (<a href="mailto:jaon82@gmail.com">jaon82@gmail.com</a>)</li>
+                <li>Marcus Amaral (<a href="mailto:m4rkux@gmail.com">m4rkux@gmail.com</a>)</li>
+                <li>Leandro Araújo (<a href="mailto:eu@leandrocesar.com.br">eu@leandrocesar.com.br</a>)</li>
+                <li>Luiz Franco (<a href="mailto:lmmfranco@gmail.com">lmmfranco@gmail.com</a>)</li>
+                <li>Herbert Ribeiro (<a href="mailto:herbert.rlopes@gmail.com">herbert.rlopes@gmail.com</a>)</li>
+                <li>Renan Bezerra (<a href="mailto:renankcb@gmail.com">renankcb@gmail.com</a>)</li>
+                <li>Igor Martins (<a href="mailto:igor.martins@gmail.com">igor.martins@gmail.com</a>)</li>
+            </ul>
+
+            <h5>Projeto:</h5>
+
+            <ul>
+                <li>https://github.com/khiby/Controle-ponto (Versão Chrome App)</li>
+                <li>https://github.com/khiby/uPonto (Versões Web e Firefox Plugin)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal" data-modal-id="holidays">
+        <div class="modal-mask"></div>
+        <a class="modal-close sprite" data-close-modal-id="holidays" title="Fechar" href="#"></a>
+
+        <div class="modal-content">
+            <h3>Feriados</h3>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-col col-3">
+                        <label for="">Data do Feriado:</label>
+                        <input type="date" />
+                    </div>
+
+                    <div class="form-col col-7">
+                        <label for="">Motivo do Feriado:</label>
+                        <input type="text" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col col-3">
+                        <input type="date" />
+                    </div>
+
+                    <div class="form-col col-7">
+                        <input type="text" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" data-modal-id="export">
+        <div class="modal-mask"></div>
+        <a class="modal-close sprite" data-close-modal-id="export" title="Fechar" href="#"></a>
+
+        <div class="modal-content">
+            <h3>Exportar</h3>
+
+            <form>
+                <p>Salve o conteúdo abaixo em um arquivo para que possa ser reimportado novamente.</p>
+
+                <div class="form-row">
+                    <div class="form-col col-10">
+                        <textarea>{"1394510400000":"{\"entrada\":1394543700000,\"ida_almoco\":1394552940000,\"volta_almoco\":1394556600000,\"saida\":1394576880000,\"vpn\":\"\",\"obs\":\"Batidas originais: 09:15,11:49,12:50,18:28\",\"ausent\":false}","1394596800000":"{\"entrada\":1394626200000,\"ida_almoco\":1394639280000,\"volta_almoco\":1394643060000,\"saida\":1394663700000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:10,11:48,12:51,18:35\",\"ausent\":false}","1394683200000":"{\"entrada\":1394715000000,\"ida_almoco\":1394725680000,\"volta_almoco\":1394729820000,\"saida\":1394749980000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:50,11:48,12:57,18:33\",\"ausent\":false}","1394769600000":"{\"entrada\":1394798820000,\"ida_almoco\":1394812260000,\"volta_almoco\":1394816400000,\"saida\":1394835780000,\"vpn\":1394773200000,\"obs\":\"Batidas originais: 08:07,11:51,13:00,18:23\",\"ausent\":false}","1395028800000":"{\"entrada\":1395058920000,\"ida_almoco\":1395071220000,\"volta_almoco\":1395075240000,\"saida\":1395095160000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:22,11:47,12:54,18:26\",\"ausent\":false}","1395115200000":"{\"entrada\":1395144720000,\"ida_almoco\":1395157680000,\"volta_almoco\":1395161520000,\"saida\":1395184500000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:12,11:48,12:52,19:15\",\"ausent\":false}","1395201600000":"{\"entrada\":1395230760000,\"ida_almoco\":1395244080000,\"volta_almoco\":1395247560000,\"saida\":1395268380000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:06,11:48,12:46,18:33\",\"ausent\":false}","1395288000000":"{\"entrada\":1395318480000,\"ida_almoco\":1395330300000,\"volta_almoco\":1395335640000,\"saida\":1395354840000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:28,11:45,13:14,18:34\",\"ausent\":false}","1395374400000":"{\"entrada\":1395403920000,\"ida_almoco\":1395417060000,\"volta_almoco\":1395421320000,\"saida\":1395423360000,\"vpn\":1395378000000,\"obs\":\"Batidas originais: 08:12,11:51,13:02,13:36\",\"ausent\":false}","1395633600000":"{\"entrada\":1395663420000,\"ida_almoco\":1395675960000,\"volta_almoco\":1395679980000,\"saida\":1395700260000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:17,11:46,12:53,18:31\",\"ausent\":false}","1395720000000":"{\"entrada\":1395749820000,\"ida_almoco\":1395762240000,\"volta_almoco\":1395765840000,\"saida\":1395785700000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:17,11:44,12:44,18:15\",\"ausent\":false}","1395806400000":"{\"entrada\":1395836220000,\"ida_almoco\":1395848100000,\"volta_almoco\":1395852840000,\"saida\":1395875100000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:17,11:35,12:54,19:05\",\"ausent\":false}","1395892800000":"{\"entrada\":1395924180000,\"ida_almoco\":1395935040000,\"volta_almoco\":1395938760000,\"saida\":1395960600000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:43,11:44,12:46,18:50\",\"ausent\":false}","1395979200000":"{\"entrada\":1396010820000,\"ida_almoco\":1396020660000,\"volta_almoco\":1396024260000,\"saida\":1396047660000,\"vpn\":1395982800000,\"obs\":\"Batidas originais: 08:47,11:31,12:31,19:01\",\"ausent\":false}","1396238400000":"{\"entrada\":1396269900000,\"ida_almoco\":1396280640000,\"volta_almoco\":1396284240000,\"saida\":1396303920000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:45,11:44,12:44,18:12\",\"ausent\":false}","1396324800000":"{\"entrada\":1396355880000,\"ida_almoco\":1396367220000,\"volta_almoco\":1396370820000,\"saida\":1396390080000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:38,11:47,12:47,18:08\",\"ausent\":false}","1396411200000":"{\"entrada\":1396442400000,\"ida_almoco\":1396453260000,\"volta_almoco\":1396457640000,\"saida\":1396479780000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:40,11:41,12:54,19:03\",\"ausent\":false}","1396497600000":"{\"entrada\":1396527840000,\"ida_almoco\":1396539900000,\"volta_almoco\":1396544580000,\"saida\":1396569480000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:24,11:45,13:03,19:58\",\"ausent\":false}","1396584000000":"{\"entrada\":1396615860000,\"ida_almoco\":1396626780000,\"volta_almoco\":1396631580000,\"saida\":1396653720000,\"vpn\":1396587600000,\"obs\":\"Batidas originais: 08:51,11:53,13:13,19:22\",\"ausent\":false}","1396843200000":"{\"entrada\":1396875540000,\"ida_almoco\":1396885800000,\"volta_almoco\":1396890300000,\"saida\":1396912560000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:59,11:50,13:05,19:16\",\"ausent\":false}","1396929600000":"{\"entrada\":1396960680000,\"ida_almoco\":1396971600000,\"volta_almoco\":1396975260000,\"saida\":1396996860000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:38,11:40,12:41,18:41\",\"ausent\":false}","1397016000000":"{\"entrada\":1397047680000,\"ida_almoco\":1397058600000,\"volta_almoco\":1397062200000,\"saida\":1397084640000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:48,11:50,12:50,19:04\",\"ausent\":false}","1397102400000":"{\"entrada\":1397134080000,\"ida_almoco\":1397144280000,\"volta_almoco\":1397148000000,\"saida\":1397170620000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:48,11:38,12:40,18:57\",\"ausent\":false}","1397188800000":"{\"entrada\":1397219520000,\"ida_almoco\":1397231100000,\"volta_almoco\":1397235660000,\"saida\":1397255100000,\"vpn\":1397192400000,\"obs\":\"Batidas originais: 08:32,11:45,13:01,18:25\",\"ausent\":false}","1397448000000":"{\"entrada\":1397479920000,\"ida_almoco\":1397489880000,\"volta_almoco\":1397493480000,\"saida\":1397513100000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:52,11:38,12:38,18:05\",\"ausent\":false}","1397534400000":"{\"entrada\":1397565900000,\"ida_almoco\":1397576700000,\"volta_almoco\":1397580480000,\"saida\":1397599200000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:45,11:45,12:48,18:00\",\"ausent\":false}","1397620800000":"{\"entrada\":1397653620000,\"ida_almoco\":1397662680000,\"volta_almoco\":1397667480000,\"saida\":1397685600000,\"vpn\":\"\",\"obs\":\"Batidas originais: 09:07,11:38,12:58,18:00\",\"ausent\":false}","1397707200000":"{\"entrada\":1397734560000,\"ida_almoco\":1397750640000,\"volta_almoco\":1397754420000,\"saida\":1397772120000,\"vpn\":\"\",\"obs\":\"Batidas originais: 07:36,12:04,13:07,18:02\",\"ausent\":false}","1398139200000":"{\"entrada\":1398170340000,\"ida_almoco\":1398181260000,\"volta_almoco\":1398184860000,\"saida\":1398207120000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:39,11:41,12:41,18:52\",\"ausent\":false}","1398225600000":"{\"entrada\":1398257400000,\"ida_almoco\":1398268140000,\"volta_almoco\":1398271740000,\"saida\":1398293400000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:50,11:49,12:49,18:50\",\"ausent\":false}","1398312000000":"{\"entrada\":1398343440000,\"ida_almoco\":1398355440000,\"volta_almoco\":1398359040000,\"saida\":1398380820000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:44,12:04,13:04,19:07\",\"ausent\":false}","1398398400000":"{\"entrada\":1398429900000,\"ida_almoco\":1398440340000,\"volta_almoco\":1398444060000,\"saida\":1398466500000,\"vpn\":1398402000000,\"obs\":\"Batidas originais: 08:45,11:39,12:41,18:55\",\"ausent\":false}","1398657600000":"{\"entrada\":1398689220000,\"ida_almoco\":1398700140000,\"volta_almoco\":1398710520000,\"saida\":1398725520000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:47,11:49,14:42,18:52\",\"ausent\":false}","1398744000000":"{\"entrada\":1398775680000,\"ida_almoco\":1398785580000,\"volta_almoco\":1398789120000,\"saida\":1398813300000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:48,11:33,12:32,19:15\",\"ausent\":false}","1398830400000":"{\"entrada\":1398861960000,\"ida_almoco\":1398872460000,\"volta_almoco\":1398878400000,\"saida\":1398898500000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:46,11:41,13:20,18:55\",\"ausent\":false}","1399262400000":"{\"entrada\":1399294020000,\"ida_almoco\":1399304820000,\"volta_almoco\":1399308420000,\"saida\":1399330200000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:47,11:47,12:47,18:50\",\"ausent\":false}","1399348800000":"{\"entrada\":1399381500000,\"ida_almoco\":1399390740000,\"volta_almoco\":1399394340000,\"saida\":1399418040000,\"vpn\":\"\",\"obs\":\"Batidas originais: 09:05,11:39,12:39,19:14\",\"ausent\":false}","1399435200000":"{\"entrada\":1399466700000,\"ida_almoco\":1399478220000,\"volta_almoco\":1399482420000,\"saida\":1399503900000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:45,11:57,13:07,19:05\",\"ausent\":false}","1399521600000":"{\"entrada\":1399553400000,\"ida_almoco\":1399563840000,\"volta_almoco\":1399567440000,\"saida\":1399593300000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:50,11:44,12:44,19:55\",\"ausent\":false}","1399608000000":"{\"entrada\":1399638960000,\"ida_almoco\":1399650360000,\"volta_almoco\":1399654440000,\"saida\":1399675560000,\"vpn\":1399611600000,\"obs\":\"Batidas originais: 08:36,11:46,12:54,18:46\",\"ausent\":false}","1399867200000":"{\"entrada\":1399898940000,\"ida_almoco\":1399909620000,\"volta_almoco\":1399913700000,\"saida\":1399934880000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:49,11:47,12:55,18:48\",\"ausent\":false}","1399953600000":"{\"entrada\":1399984740000,\"ida_almoco\":1399996140000,\"volta_almoco\":1399999800000,\"saida\":1400022300000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:39,11:49,12:50,19:05\",\"ausent\":false}","1400040000000":"{\"entrada\":1400070780000,\"ida_almoco\":1400082600000,\"volta_almoco\":1400086440000,\"saida\":1400107380000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:33,11:50,12:54,18:43\",\"ausent\":false}","1400126400000":"{\"entrada\":1400157120000,\"ida_almoco\":1400168640000,\"volta_almoco\":1400172300000,\"saida\":1400195280000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:32,11:44,12:45,19:08\",\"ausent\":false}","1400212800000":"{\"entrada\":1400246100000,\"ida_almoco\":1400254380000,\"volta_almoco\":1400258820000,\"saida\":1400277480000,\"vpn\":1400216400000,\"obs\":\"Batidas originais: 09:15,11:33,12:47,17:58\",\"ausent\":false}","1400472000000":"{\"entrada\":1400504040000,\"ida_almoco\":1400514540000,\"volta_almoco\":1400518080000,\"saida\":1400540160000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:54,11:49,12:48,18:56\",\"ausent\":false}","1400558400000":"{\"entrada\":1400589480000,\"ida_almoco\":1400600100000,\"volta_almoco\":1400603700000,\"saida\":1400626200000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:38,11:35,12:35,18:50\",\"ausent\":false}","1400644800000":"{\"entrada\":1400676660000,\"ida_almoco\":1400686920000,\"volta_almoco\":1400690520000,\"saida\":1400712000000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:51,11:42,12:42,18:40\",\"ausent\":false}","1400731200000":"{\"entrada\":1400762460000,\"ida_almoco\":1400773620000,\"volta_almoco\":1400777220000,\"saida\":1400797920000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:41,11:47,12:47,18:32\",\"ausent\":false}","1400817600000":"{\"entrada\":1400849160000,\"ida_almoco\":1400859960000,\"volta_almoco\":1400863560000,\"saida\":1400884680000,\"vpn\":1400821200000,\"obs\":\"Batidas originais: 08:46,11:46,12:46,18:38\",\"ausent\":false}","1401076800000":"{\"entrada\":1401108420000,\"ida_almoco\":1401118500000,\"volta_almoco\":1401122220000,\"saida\":1401144060000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:47,11:35,12:37,18:41\",\"ausent\":false}","1401163200000":"{\"entrada\":1401194940000,\"ida_almoco\":1401204960000,\"volta_almoco\":1401208560000,\"saida\":1401230760000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:49,11:36,12:36,18:46\",\"ausent\":false}","1401249600000":"{\"entrada\":1401281520000,\"ida_almoco\":1401291240000,\"volta_almoco\":1401294900000,\"saida\":1401316560000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:52,11:34,12:35,18:36\",\"ausent\":false}","1401336000000":"{\"entrada\":1401367560000,\"ida_almoco\":1401378780000,\"volta_almoco\":1401382380000,\"saida\":1401402600000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:46,11:53,12:53,18:30\",\"ausent\":false}","1401422400000":"{\"entrada\":1401454380000,\"ida_almoco\":1401465240000,\"volta_almoco\":1401469500000,\"saida\":1401492360000,\"vpn\":1401426000000,\"obs\":\"Batidas originais: 08:53,11:54,13:05,19:26\",\"ausent\":false}","1401681600000":"{\"entrada\":1401713520000,\"ida_almoco\":1401723240000,\"volta_almoco\":1401727560000,\"saida\":1401748860000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:52,11:34,12:46,18:41\",\"ausent\":false}","1401768000000":"{\"entrada\":1401799560000,\"ida_almoco\":1401810360000,\"volta_almoco\":1401813960000,\"saida\":1401836040000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:46,11:46,12:46,18:54\",\"ausent\":false}","1401854400000":"{\"entrada\":1401885540000,\"ida_almoco\":1401896400000,\"volta_almoco\":1401900540000,\"saida\":1401922800000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:39,11:40,12:49,19:00\",\"ausent\":false}","1401940800000":"{\"entrada\":1401972900000,\"ida_almoco\":1401982560000,\"volta_almoco\":1401986160000,\"saida\":1402009020000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:55,11:36,12:36,18:57\",\"ausent\":false}","1402027200000":"{\"entrada\":1402059000000,\"ida_almoco\":1402068900000,\"volta_almoco\":1402075080000,\"saida\":1402094820000,\"vpn\":1402030800000,\"obs\":\"Batidas originais: 08:50,11:35,13:18,18:47\",\"ausent\":false}","1402200000000":"{\"entrada\":\"\",\"ida_almoco\":\"\",\"volta_almoco\":\"\",\"saida\":\"\",\"vpn\":\"\",\"obs\":\"\",\"ausent\":false}","1402286400000":"{\"entrada\":1402317360000,\"ida_almoco\":1402328760000,\"volta_almoco\":1402332360000,\"saida\":1402354980000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:36,11:46,12:46,19:03\",\"ausent\":false}","1402372800000":"{\"entrada\":1402404300000,\"ida_almoco\":1402414500000,\"volta_almoco\":1402418100000,\"saida\":1402440060000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:45,11:35,12:35,18:41\",\"ausent\":false}","1402459200000":"{\"entrada\":1402490880000,\"ida_almoco\":1402501320000,\"volta_almoco\":1402504920000,\"saida\":1402526040000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:48,11:42,12:42\",\"ausent\":false}","1402545600000":"{\"entrada\":1402575660000,\"ida_almoco\":1402588800000,\"volta_almoco\":1402588860000,\"saida\":1402592880000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:21,13:08\",\"ausent\":false}","1402632000000":"{\"entrada\":1402663260000,\"ida_almoco\":1402674000000,\"volta_almoco\":1402677600000,\"saida\":1402700520000,\"vpn\":1402635600000,\"obs\":\"Batidas originais: 08:41,11:40,12:40,19:02\",\"ausent\":false}","1402891200000":"{\"entrada\":1402923540000,\"ida_almoco\":1402933080000,\"volta_almoco\":1402936680000,\"saida\":1402959660000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:59,11:38,12:38,19:01\",\"ausent\":false}","1402977600000":"{\"entrada\":1403007900000,\"ida_almoco\":\"\",\"volta_almoco\":\"\",\"saida\":1403020800000,\"vpn\":\"\",\"obs\":\"Batidas originais: 08:25,12:00\",\"ausent\":false}","1403236800000":"{\"entrada\":1403267700000,\"ida_almoco\":1403278680000,\"volta_almoco\":1403282280000,\"saida\":\"\",\"vpn\":\"\",\"obs\":\"Batidas originais: 08:35,11:38,12:38\",\"ausent\":false}","settings":"{\"totalWork\":\"9\",\"lunchTime\":\"1\",\"initialBalance\":\"0\",\"matricula\":\"911\",\"senha\":\"911\",\"empresa\":\"a665612\",\"holidays\":[{\"date\":\"18/06\",\"obs\":\"Jogo em Manaus\"},{\"date\":\"19/06\",\"obs\":\"Corpus Christi\"}],\"utilDays\":[\"1\",\"2\",\"3\",\"4\",\"5\"]}"}</textarea>
+                    </div>
+                </div>
+
+                <p>Ou clique no botão abaixo para baixar um arquivo JSON de backup.</p>
+                <button class="btn">Baixar backup</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" data-modal-id="settings">
+        <div class="modal-mask"></div>
+        <a class="modal-close sprite" data-close-modal-id="settings" title="Fechar" href="#"></a>
+
+        <div class="modal-content">
+            <h3>Configurações</h3>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-col col-5">
+                        <label class="inline" for="">Carga de trabalho diária (em horas):</label>
+                    </div>
+
+                    <div class="form-col col-3">
+                        <input type="text" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col col-5">
+                        <label class="inline" for="">Tempo de almoço padrão (em horas):</label>
+                    </div>
+
+                    <div class="form-col col-3">
+                        <input type="number" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col col-5">
+                        <label class="inline" for="">Saldo de horas inicial (em horas):</label>
+                    </div>
+
+                    <div class="form-col col-3">
+                        <input type="number" />
+                    </div>
+                </div>
+
+                <fieldset>
+                    <p>
+                        <label for="monday">Dias com expediente:</label>
+                    </p>
+
+                    <div class="form-col col-2">
+                        <label for="sunday">
+                            <input id="sunday" type="checkbox" />
+                            Domingo
+                        </label>
+                    </div>
+
+                    <div class="form-col col-2">
+                        <label for="monday">
+                            <input id="monday" type="checkbox" />
+                            Segunda
+                        </label>
+                    </div>
+
+                    <div class="form-col col-2">
+                        <label for="tuesday">
+                            <input id="tuesday" type="checkbox" />
+                            Terça
+                        </label>
+                    </div>
+
+                    <div class="form-col col-2">
+                        <label for="wednesday">
+                            <input id="wednesday" type="checkbox" />
+                            Quarta
+                        </label>
+                    </div>
+
+                    <div class="form-col col-2">
+                        <label for="thursday">
+                            <input id="thursday" type="checkbox" />
+                            Quinta
+                        </label>
+                    </div>
+
+                    <div class="form-col col-2">
+                        <label for="friday">
+                            <input id="friday" type="checkbox" />
+                            Sexta
+                        </label>
+                    </div>
+
+                    <div class="form-col col-2">
+                        <label for="saturday">
+                            <input id="saturday" type="checkbox" />
+                            Sábado
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="form-row">
+                    <div class="form-col col-10">
+                        <label for="h-ahgora">
+                            <input id="h-ahgora" data-reveal="c-ahgora" type="checkbox" />
+                            Habilitar integração com Ahgora!
+                        </label>
+                    </div>
+                </div>
+
+                <fieldset data-reveal-id="c-ahgora" style="display: none;">
+                    <h4>Integração Ahgora</h4>
+
+                    <div class="form-row">
+                        <div class="form-col col-5">
+                            <label class="inline" for="">Matrícula:</label>
+                        </div>
+
+                        <div class="form-col col-3">
+                            <input type="text" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col col-5">
+                            <label class="inline" for="">Senha:</label>
+                        </div>
+
+                        <div class="form-col col-3">
+                            <input type="password" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col col-5">
+                            <label class="inline" for="">Código da Empresa:</label>
+                        </div>
+
+                        <div class="form-col col-3">
+                            <input type="text" />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-row">
+                    <div class="form-col col-10">
+                        <label for="h-notify">
+                            <input id="h-notify" data-reveal="c-notify" type="checkbox" />
+                            Permitir notificações (Google Chrome e Mozilla Firefox)
+                        </label>
+                    </div>
+                </div>
+
+                <fieldset data-reveal-id="c-notify" style="display: none;">
+                    <h4>Notificações</h4>
+
+                    <button class="btn">Checar permissões</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" data-modal-id="editable">
+        <div class="modal-mask"></div>
+        <a class="modal-close sprite" data-close-modal-id="editable" title="Fechar" href="#"></a>
+
+        <div class="modal-content">
+            <h3>Anotações</h3>
+
+            <form>
+                <textarea></textarea>
+            </form>
+        </div>
+    </div>
+
+    <div class="loading">
+        <div class="loading-mask"></div>
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/layout.js"></script>
+</body>
+</html>
