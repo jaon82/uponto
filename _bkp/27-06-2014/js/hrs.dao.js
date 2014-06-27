@@ -4,7 +4,6 @@ hrs.dao = (function($, helpers){
 	var public = {};
 	
 	var SETTINGS_KEY = 'settings';
-	var EMPRESA_DEFAULT = 'a665612';
 	
 	var settings = null;
 	
@@ -125,6 +124,29 @@ hrs.dao = (function($, helpers){
 		localStorage.setItem(dateTime.getTime(), $.toJSON(data));
 	};
 	
+	/**
+	 * Stores the import date and import flag of a given month/year
+	 * @author Eder Martins Franco
+	 * @since 1.5
+	 */
+	public.setAhgoraLog = function(monthYear,imported,importDate){
+		var dataToStore;
+		dataToStore.monthYear = monthYear;
+		dataToStore.imported = alreadySync;
+		dataToStore.importDate = importDate;
+		localStorage.setItem(monthYear, $.toJSON(dataToStore));
+	}
+	
+	/**
+	 * Recover the import date and import flag of a given month/year
+	 * @author Eder Martins Franco
+	 * @since 1.5
+	 */
+	public.getAgoraLog = function(monthYear){
+		var info = $.evalJSON(localStorage.getItem(monthYear));
+		return info;
+	}
+	
 	public.saveSettings = function(newSettings){ 
 		settings = newSettings;
 		localStorage.setItem(SETTINGS_KEY, $.toJSON(newSettings)); 
@@ -136,9 +158,8 @@ hrs.dao = (function($, helpers){
 			defaultUtilDays = ['1','2','3','4','5'];
 
 		if(savedSettings == null || savedSettings == "")
-			return {totalWork: 9, lunchTime: 1, permAhgora: 0, empresa: EMPRESA_DEFAULT, permNotif: 0, holidays: [], initialBalance: 0, utilDays:defaultUtilDays};
-			//permOponto
-			
+			return {totalWork: 8, lunchTime: 1, holidays: [], initialBalance: 0, utilDays:defaultUtilDays};
+		
 		savedSettings = $.evalJSON(savedSettings);
 		savedSettings.lunchTime = parseFloat(savedSettings.lunchTime);
 		savedSettings.totalWork = parseFloat(savedSettings.totalWork);

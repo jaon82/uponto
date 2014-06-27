@@ -30,7 +30,7 @@
 
         <nav class="top-nav" role="navigation">
             <ul class="top-nav-menu">
-                <li>
+                <li class="top-nav-menu-sub">
                     <a href="#">Opções</a>
                     <ul>
                         <li><a data-modal="holidays" href="#holidays">Feriados</a></li>
@@ -902,7 +902,7 @@
                     </div>
 
                     <div class="form-col col-3">
-                        <input type="text" />
+                        <input placeholder="ex.: 44" type="text" />
                     </div>
                 </div>
 
@@ -912,7 +912,7 @@
                     </div>
 
                     <div class="form-col col-3">
-                        <input type="number" />
+                        <input placeholder="ex.: 1" type="number" />
                     </div>
                 </div>
 
@@ -922,7 +922,17 @@
                     </div>
 
                     <div class="form-col col-3">
-                        <input type="number" />
+                        <input type="time" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col col-5">
+                        <label class="inline" for="">Calcular saldo a partir de:</label>
+                    </div>
+
+                    <div class="form-col col-3">
+                        <input placeholder="dd/mm/aaaa" type="date" />
                     </div>
                 </div>
 
@@ -1042,6 +1052,10 @@
         </div>
     </div>
 
+    <!--
+    NOTA
+    O Herbert achou pequena.
+    -->
     <div class="modal" data-modal-id="editable">
         <div class="modal-mask"></div>
         <a class="modal-close sprite" data-close-modal-id="editable" title="Fechar" href="#"></a>

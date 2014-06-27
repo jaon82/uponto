@@ -89,7 +89,7 @@ $(function() {
 
             $(this).parents().find('[data-reveal-id="' + toReveal + '"]').fadeIn(300);
 
-            console.log( $(this).data('reveal') );
+            //console.log( $(this).data('reveal') );
         } else {
             $(this).parents().find('[data-reveal-id="' + toReveal + '"]').fadeOut(300);
         }
@@ -106,13 +106,9 @@ $(function() {
     var indexedURL    = splitedURL[urlIndex];
     var firstCharLink = indexedURL.charAt(0);
 
-    console.log( indexedURL );
-
-    if( indexedURL.length > 0 && firstCharLink === '#' ) {
+    if( indexedURL.length > 0 && firstCharLink === '#' && indexedURL !== '#update' ) {
         var modalId  = indexedURL.replace("#","");
         var modalDiv = $('body').find('[data-modal-id="' + modalId + '"]');
-
-        console.log( modalDiv );
 
         modalDiv.fadeIn(300, function() {
             $(this).children('.modal-mask').on('click', function() {
@@ -122,12 +118,15 @@ $(function() {
     }
 
     $('a').on('click', function() {
-        var url       = $(this).attr('href');
-        var firstChar = url.charAt(0);
+        var url        = $(this).attr('href');
+        var splitedURL = url.split("/");
+        var urlIndex   = splitedURL.length-1;
+        var indexedURL = splitedURL[urlIndex];
+        var firstChar  = url.charAt(0);
 
-        if( firstChar === '#' && url.length > 1 ) {
+        if( firstChar === '#' && url.length > 1 && indexedURL !== '#update' ) {
             $(location).attr('href', url);
-        } else if( firstChar === '#' && url.length < 2 ) {
+        } else if( firstChar === '#' && url.length < 2 && indexedURL !== '#update' ) {
             $(location).attr('href', ' ');
         }
     });
