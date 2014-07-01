@@ -188,7 +188,8 @@ hrs.ui.main = (function($, helpers, dao){
 		} else 
 		*/
 		if(parseInt(cMin) == 59 && parseInt(cSec) == 0){
-			importAhgora(cMonth,cYear,thisDay);
+			//importAhgora(cMonth,cYear,thisDay);
+			ahgora.import(cMonth,cYear,thisDay);
 		}
 		
 		var t = setTimeout(function(){
