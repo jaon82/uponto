@@ -447,7 +447,8 @@ hrs.ui.main = (function($, helpers, dao){
 				break;
 			case 0:
 				if(s == 59){
-					notificationTeste(m);
+					var mensagem = "Falta menos de 1 minuto para sua saída. Fique atento!";
+					notificationGeral(mensagem,"default");
 				}
 				break;
 			}
@@ -531,6 +532,7 @@ hrs.ui.main = (function($, helpers, dao){
 		var settings = dao.loadSettings();
 		$("#total-work").val(settings.totalWork).change(saveSettings);
 		$("#lunch-time").val(settings.lunchTime).change(saveSettings);
+		$("#control-since").val(settings.controlSince).change(saveSettings);
 		$("#initial-balance").val(settings.initialBalance).change(saveSettings);
 		
 		if(settings.permAhgora == 1){
@@ -618,10 +620,13 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		//var permOponto = $("#permOponto").is(":checked");
 		//permOponto = (permOponto)?1:0;
-
+		
+		var controlSince = $("#control-since").val();
+		
 		dao.saveSettings({
 			'totalWork': $("#total-work").val(),
 			'lunchTime': $("#lunch-time").val(),
+			'controlSince' : controlSince,
 			'initialBalance': $("#initial-balance").val(),
 			'permAhgora': permAhgora,
 			'permNotif': permNotif,
@@ -713,4 +718,5 @@ hrs.ui.main = (function($, helpers, dao){
 
 $(function(){
 	hrs.ui.main.init($("#main-table"));
-})
+	$( "#control-since" ).datepicker({ dateFormat: 'dd/mm/yy' });
+});
