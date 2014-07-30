@@ -8,7 +8,7 @@
 function Ahgora(matricula,senha,empresa,helpers,dao,openAlert,closeAlert,monthFunc,timerFunc){
 	
 	IMPORT_URL = "http://khi.by/projetos/pontoconn/";
-	//Fake URL for local testing: "http://localhost/uPonto/testes/fake.php";
+	//Fake URL for local testing: "http://localhost/uponto/testes/fake.php";
 	var AHGORA_MATRICULA = null;
 	var AHGORA_SENHA = null;
 	var AHGORA_EMPRESA = null;

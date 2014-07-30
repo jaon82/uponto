@@ -199,16 +199,16 @@
 				<td class="total all-worked">{total}</td>
 				<td class="almoco lunch">{almoco}</td>
 				<td class="excedente extra">{excedente}</td>
-				<td class="obs_cell note fakeLink">
-					<img src="res/img/erro.gif" title="Remover registros deste dia" onClick="removeDay('{data}');"/>
+				<td class="obs_cell note fakeLink" onClick="removeDay('{data}');">
+					<img src="res/img/erro.gif" title="Remover registros deste dia"  class=".delIcon"/>
 				</td>
 				<td class="obs_cell note">
 					<div class="obs">{obs}</div>
 					<a href="#view-full-obs" class="view-full-obs {cssObsPreenchida}" title="{obs}"></a>
 				</td>
-				<td class="obs_cell note fakeLink">
-					<input type="checkbox" value="S" class="ausent hiddenObj" {checked} title="Marque se você faltou neste dia"/>
-					<img src="res/img/ausent.png" title="Ausente no local de trabalho. Clique para sinalizar presença neste dia."/>
+				<td class="obs_cell note fakeLink ausentLine" onClick="toogleAusent('{data}');"> 
+					<input type="checkbox" value="S" class="ausent hiddenObj" title="Marque se você faltou neste dia"/>
+					<img src="res/img/ausent.png" title="Ausente no local de trabalho. Clique para sinalizar presença neste dia." class="ausentImg"/>
 					<img src="res/img/user2.png" title="Presente no local de trabalho. Clique para sinalizar ausência neste dia." class="hiddenObj"/>
 				</td>
 			    <td style="border-right: 1px solid #ccc; padding: 5px; cursor: pointer;">
