@@ -188,7 +188,7 @@ hrs.ui.main = (function($, helpers, dao){
 		var ausentImg = $("#"+rowDate+" .ausentImg");
 		var isAusent = $("#"+rowDate+" .ausentLine input").attr("checked");
 		
-		alert(isAusent);
+		//alert(isAusent);
 		if(isAusent && isAusent.length > 0){
 			ausent.removeAttr("checked");
 			ausent.val("N");
@@ -200,6 +200,8 @@ hrs.ui.main = (function($, helpers, dao){
 			ausentImg.attr("src","res/img/user2.png");
 			ausentImg.attr("title","Ausente no local de trabalho. Clique para sinalizar presença neste dia.");
 		}
+		
+		currentMonth.changeEvent2(rowDate);
 		
 		
 		

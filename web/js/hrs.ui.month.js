@@ -189,6 +189,41 @@ hrs.ui.month = function(month, year) {
 		if(_updatedRowCallback != null) _updatedRowCallback($row, info);
 	}	
 	
+	public.changeEvent2 = function(rowDate){
+		alert(rowDate);
+		var rowDate = new Date(parseInt(rowDate));
+		var isAusent =  $row.find('.ausent')[0].checked;
+
+		var jsonInfo = {
+			entrada: _dateHelpers.parseDateTime($row.find('.start').val(), rowDate),
+			ida_almoco: _dateHelpers.parseDateTime($row.find('.lunch-start').val(), rowDate),
+			volta_almoco: _dateHelpers.parseDateTime($row.find('.lunch-end').val(), rowDate),
+			saida: _dateHelpers.parseDateTime($row.find('.end').val(), rowDate),
+			vpn: _dateHelpers.parseDateTime($row.find('.vpn').val(), rowDate),
+			obs: $row.find('.obs').text(),
+			ausent: isAusent
+		}
+
+		_dao.storeDate(rowDate, jsonInfo);
+		
+		if(isAusent){
+			$row.find('input[type!=checkbox]').attr('disabled', true);
+		} else {
+			$row.find('input[type!=checkbox]').removeAttr('disabled');
+		}
+
+		var info = _getRowInfo(rowDate);
+		$row.find('.total').html(info.total);
+		$row.find('.excedente').html(info.excedente);
+		$row.find('.almoco').html(info.almoco);
+
+		if(jsonInfo.entrada != ''){
+			$row.find('.end').attr('placeholder', info.expectedExit);
+		}
+		
+		if(_updatedRowCallback != null) _updatedRowCallback($row, info);
+	};
+	
 	function blurEvent(e){
 		var $input = $(e.target);
 		var value = $input.val();
