@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Utilitários js
  * @author Eder Franco
  * @since: v1.8 (26/05/2014)

@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Notificações para Desktop
  * @author Eder Franco
  * @since: v1.8 (26/05/2014)
@@ -28,13 +28,13 @@ DesktopNotifications.prototype.checkPermission = function(){
 	var result = {isOK: false, msg: ""};
 	// Let's check if the browser supports notifications
 	if (!("Notification" in window)) {
-	  result.msg = "Este browser não oferece suporte para notificações de desktop";
+	  result.msg = "Este browser nÃ£o oferece suporte para notificaÃ§Ãµes de desktop";
 	  result.isOK = false;
 	}
 	// Let's check if the user is okay to get some notification
 	else if (Notification.permission === "granted") {
 	// If it's okay let's create a notification
-	  result.msg = "Notificações suportadas e permissão concedida pelo usuário.";
+	  result.msg = "NotificaÃ§Ãµes suportadas e permissÃ£o concedida pelo usuÃ¡rio.";
 	  result.isOK = true;
 	}
 	
@@ -51,7 +51,7 @@ DesktopNotifications.prototype.checkPermission = function(){
 		
 		  // If the user is okay, let's create a notification
 		  if (permission === "granted") {
-			  result.msg = "Notificações suportadas e permissão concedida pelo usuário.";
+			  result.msg = "NotificaÃ§Ãµes suportadas e permissÃ£o concedida pelo usuÃ¡rio.";
 			  result.isOK = true;
 		  }
 		});
@@ -110,7 +110,7 @@ DesktopNotifications.prototype.create = function(title,options,url,sound){
 			notification.onclick = notificationClick;
 		}
 	} else {
-		if(confirm("Você ainda não autorizou o uso de notificações.\nDeseja revisar as pemissões?")){
+		if(confirm("VocÃª ainda nÃ£o autorizou o uso de notificaÃ§Ãµes.\nDeseja revisar as pemissÃµes?")){
 			permission = this.checkPermission();
 		}
 	}

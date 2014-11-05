@@ -1,4 +1,4 @@
-// check for notifications support
+﻿// check for notifications support
 // you can omit the 'window' keyword
 if (window.webkitNotifications) {
   console.log("Notifications are supported!");

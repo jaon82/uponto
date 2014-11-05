@@ -1,4 +1,4 @@
-hrs = window.hrs || {};
+﻿hrs = window.hrs || {};
 
 hrs.dao = (function($, helpers){
 	var public = {};

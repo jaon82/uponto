@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Classe de integração com a API do sistema Ahgora
  * @author Eder Franco
  * @since: v1.11 17/06/2014)
@@ -22,7 +22,7 @@ function Ahgora(matricula,senha,empresa,helpers,dao,openAlert,closeAlert,monthFu
 	initNotifTimer = timerFunc;
 	
 	if(matricula == null || senha == null || empresa == null){
-		var msg = "Informe sua Matrícula, Senha e Empresa nas Configurações antes de realizar a importação.";
+		var msg = "Informe sua MatrÃ­cula, Senha e Empresa nas ConfiguraÃ§Ãµes antes de realizar a importaÃ§Ã£o.";
 		$("#msg-lightbox-content").html(msg);
 		closeLightbox("#perform-update");
 		openLightbox("#msg-lightbox");
@@ -40,7 +40,7 @@ Ahgora.prototype.teste = function(){
 
 Ahgora.prototype.checkSettings = function(){
 	if(matricula == null || senha == null || empresa == null){
-		var msg = "Informe sua Matrícula, Senha e Empresa nas Configurações antes de realizar a importação.";
+		var msg = "Informe sua MatrÃ­cula, Senha e Empresa nas ConfiguraÃ§Ãµes antes de realizar a importaÃ§Ã£o.";
 		$("#msg-lightbox-content").html(msg);
 		closeLightbox("#perform-update");
 		openLightbox("#msg-lightbox");
@@ -151,7 +151,7 @@ Ahgora.prototype.import = function (month,year,day){
 			}
 			
 		} else {//Se ocorreu erro.
-			console.log("Importação falhou.");
+			console.log("ImportaÃ§Ã£o falhou.");
 			closeLightbox("#perform-update");
 			openLightbox("#error-update");
 			

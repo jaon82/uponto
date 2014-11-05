@@ -1,4 +1,4 @@
-hrs = window.hrs || {};
+Ôªøhrs = window.hrs || {};
 hrs.ui = window.hrs.ui || {};
 utils = new Utils();
 
@@ -57,7 +57,7 @@ hrs.ui.main = (function($, helpers, dao){
 				wodpause = true;
 			} else {
 				document.getElementById('alarm-sound-wod').play();
-				$("#alarm-sound-wod").val("Pausar M˙sica");
+				$("#alarm-sound-wod").val("Pausar M√∫sica");
 				wodpause = false;
 			}
 		});
@@ -206,12 +206,12 @@ hrs.ui.main = (function($, helpers, dao){
 			ausent.removeAttr("checked");
 			ausent.val("N");
 			ausentImg.attr("src","res/img/ausent.png");
-			ausentImg.attr("title","Presente no local de trabalho. Clique para sinalizar ausÍncia neste dia.");
+			ausentImg.attr("title","Presente no local de trabalho. Clique para sinalizar aus√™ncia neste dia.");
 		} else {
 			ausent.attr("checked","checked");
 			ausent.val("S");
 			ausentImg.attr("src","res/img/user2.png");
-			ausentImg.attr("title","Ausente no local de trabalho. Clique para sinalizar presenÁa neste dia.");
+			ausentImg.attr("title","Ausente no local de trabalho. Clique para sinalizar presen√ßa neste dia.");
 		}
 		
 		currentMonth.changeEvent2(rowDate);
@@ -253,7 +253,7 @@ hrs.ui.main = (function($, helpers, dao){
 			}
 			
 			if(matricula == null || senha == null || empresa == null){
-				var msg = "Informe sua MatrÌcula, Senha e Empresa nas ConfiguraÁıes antes de realizar a importaÁ„o.";
+				var msg = "Informe sua Matr√≠cula, Senha e Empresa nas Configura√ß√µes antes de realizar a importa√ß√£o.";
 				$("#msg-lightbox-content").html(msg);
 				closeLightbox("#perform-update");
 				openLightbox("#msg-lightbox");
@@ -437,13 +437,13 @@ hrs.ui.main = (function($, helpers, dao){
 			
 			var title = "Controle de Banco de Horas";
 			var options = {
-					  body: "Faltam "+tempo+" minuto(s) para sua saÌda. Fique atento!",
+					  body: "Faltam "+tempo+" minuto(s) para sua sa√≠da. Fique atento!",
 					  icon: "res/icon.png"
 					};
 			notif.create(title,options,null);
 			
 		} else {
-			alert("NotificaÁıes n„o implementadas para esta vers„o do seu browser.");
+			alert("Notifica√ß√µes n√£o implementadas para esta vers√£o do seu browser.");
 		}
 		
 	}
@@ -463,7 +463,7 @@ hrs.ui.main = (function($, helpers, dao){
 			notif.create(title,options,null,sound);
 			
 		} else {
-			alert("NotificaÁıes n„o implementadas para esta vers„o do seu browser.");
+			alert("Notifica√ß√µes n√£o implementadas para esta vers√£o do seu browser.");
 		}
 		
 	}
@@ -476,7 +476,7 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		if(dif2Calc > 0){
 			$("#retornoAlmocoTimer").css("color","green");
-			$("#retornoAlmocoTimerLabel").html("Tempo atÈ retorno: ");
+			$("#retornoAlmocoTimerLabel").html("Tempo at√© retorno: ");
 			var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
 			dif2Calc = dif.getTime();
 		} else {
@@ -497,16 +497,16 @@ hrs.ui.main = (function($, helpers, dao){
 			switch(m){
 			case (5):
 				if(s == 59){
-					var mensagem = "Faltam "+m+" minuto(s) para encerrar seu hor·rio de almoÁo! Fique atento.";
+					var mensagem = "Faltam "+m+" minuto(s) para encerrar seu hor√°rio de almo√ßo! Fique atento.";
 					notificationGeral(mensagem,"five");
 				}
 				break;
 			case 0:
 				if(s == 59){
-					var mensagem = "Falta menos de um minuto minuto(s) para encerrar seu hor·rio de almoÁo!";
+					var mensagem = "Falta menos de um minuto minuto(s) para encerrar seu hor√°rio de almo√ßo!";
 					notificationGeral(mensagem,"default");
 				} else if(s == 00){
-					var mensagem = "Seu hor·rio de almoÁo j· encerrou! VocÍ deve bater seu ponto imediatamente!!!";
+					var mensagem = "Seu hor√°rio de almo√ßo j√° encerrou! Voc√™ deve bater seu ponto imediatamente!!!";
 					notificationGeral(mensagem,"default");
 				}
 				break;
@@ -514,7 +514,7 @@ hrs.ui.main = (function($, helpers, dao){
 	    } else if (dif2Calc < 0 && parseInt(h) == 0){
 		
 			if(m > 0 && s == 00){
-				var mensagem = "Seu hor·rio de almoÁo j· encerrou! VocÍ deve bater seu ponto imediatamente!!!";
+				var mensagem = "Seu hor√°rio de almo√ßo j√° encerrou! Voc√™ deve bater seu ponto imediatamente!!!";
 				notificationGeral(mensagem,"default");
 			}
 		}
@@ -571,7 +571,7 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		
 		if(dif2Calc > 0){
-			$("#saidaTimeLabel").html("Tempo atÈ saÌda: ");
+			$("#saidaTimeLabel").html("Tempo at√© sa√≠da: ");
 			$("#proxSaidaTimer").css("color","red");
 			var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
 			dif2Calc = dif.getTime();
@@ -592,20 +592,20 @@ hrs.ui.main = (function($, helpers, dao){
 			case 30:
 				if(s == 59){
 					//notificationTeste(m);
-					var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+					var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"default");
 				}
 				break;
 			case 20:
 				if(s == 59){
 					//notificationTeste(m);
-					var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+					var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"default");
 				}
 				break;
 			case 10:
 				if(s == 59){
-					var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+					var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"ten");
 					//notificationTeste(m);
 				}
@@ -613,18 +613,18 @@ hrs.ui.main = (function($, helpers, dao){
 			case 5:
 				if(s == 59){
 					if(m == 5){					
-						var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+						var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 						notificationGeral(mensagem,"five");
 					} else {
 						//notificationTeste(m);
-						var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+						var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 						notificationGeral(mensagem,"chimes");
 					}
 				}
 				break;
 			case 0:
 				if(s == 59){
-					var mensagem = "Falta menos de 1 minuto para sua saÌda. Fique atento!";
+					var mensagem = "Falta menos de 1 minuto para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"default");
 				}
 				break;

@@ -1,4 +1,4 @@
-hrs = window.hrs || {};
+﻿hrs = window.hrs || {};
 hrs.ui = window.hrs.ui || {};
 
 hrs.ui.month = function(month, year) {

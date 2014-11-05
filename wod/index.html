@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html>
 
 <head>
 	<title>Controle de Banco de Horas</title>
-	<meta content="text/html; charset=iso-8859-1" http-equiv="content-type" />
+	<meta content="text/html; charset=utf-8" http-equiv="content-type" />
 	<link rel="shortcut icon" href="res/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="css/oocss.css" />
 	<link rel="stylesheet" type="text/css" href="css/common.css" />
@@ -14,19 +14,21 @@
 	<script src="libs/jquery.json-2.3.min.js"></script>
 	<script src="libs/jquery.maskedinput-1.3.js"></script>
 	<script src="libs/jquery-ui/jquery-ui-1.10.4.custom.min.js"></script>
-	
+
 	<script src="js/class/Utils.js"></script>
 	<script src="js/class/DesktopNotifications.js"></script>
 	<script src="js/class/Ahgora.js"></script>
 	<script src="js/class/Timers.js"></script>
-	
-	<script src="js/extensions.js"></script>
+	<script src="js/utils/extensions.js"></script>
+	<script src="js/utils/encrypt.js"></script>
+	<script src="js/background.js"></script>
 	<script src="js/hrs.helpers.js"></script>
 	<script src="js/hrs.dao.js"></script>
 	<script src="js/hrs.timestamp.js"></script>
 	<script src="js/hrs.ui.month.js"></script>
 	<script src="js/hrs.ui.holiday.js"></script>
 	<script src="js/hrs.ui.main.js"></script>
+	
 </head>
 
 <body>
@@ -37,20 +39,20 @@
 		<ul id="header">
 			<li class="date">Dia</li>
 			<li class="begin-dayT">Entrada</li>
-			<li class="start-lunchT">Ida almoço</li>
-			<li class="end-lunchT">Volta almoço</li>
-			<li class="end-dayT">Saída</li>
+			<li class="start-lunchT">Ida almoÃ§o</li>
+			<li class="end-lunchT">Volta almoÃ§o</li>
+			<li class="end-dayT">SaÃ­da</li>
 			<li class="vpn-cell">Extra</li>
 			<li class="all-workedT">Total</li>
-			<li class="lunchT">Almoço</li>
+			<li class="lunchT">AlmoÃ§o</li>
 			<li class="extraT">B.H.</li>
-			<li class="noteT">Opções</li>
+			<li class="noteT">OpÃ§Ãµes</li>
 		</ul>
 
 		<ul id="menu">
 			<li> <a href="#sobre" class="open-lightbox" id="about-button">Sobre</a> </li>
 			<!-- <li> <a href="#export-pdf" class="export-pdf">PDF</a> </li> -->
-			<li> <a href="#configuration" class="open-lightbox">Configurações</a> </li>
+			<li> <a href="#configuration" class="open-lightbox">ConfiguraÃ§Ãµes</a> </li>
 			<li> <a href="#holidays" class="open-lightbox">Feriados</a> </li>
 			<li> <a href="#export" id="link-export" class="open-lightbox">Exportar</a> </li>
 			<li> <a href="#import-data" id="import-data" class="last">Importar</a> </li>
@@ -62,11 +64,11 @@
 			<h2>Expediente (Hoje)</h2>
 			
 			<div class="line">
-				<div class="unit label" style="width: 120px;">Saída estimada: </div>
+				<div class="unit label" style="width: 120px;">SaÃ­da estimada: </div>
 				<div id="proxSaidaExtimada" class="unit information small"></div> 
 			</div>
 			<div class="line last-line">
-				<div class="unit label" style="width: 120px;" id="saidaTimeLabel">Tempo até saída: </div>
+				<div class="unit label" style="width: 120px;" id="saidaTimeLabel">Tempo atÃ© saÃ­da: </div>
 				<div id="proxSaidaTimer" class="unit information small"></div> 
 			</div>
 		</div>
@@ -84,7 +86,7 @@
 			</div>
 			
 			<div align="center">
-				<input type="button" class="close center" id="stop-wod" value="Pausar música" />
+				<input type="button" class="close center" id="stop-wod" value="Pausar mÃºsica" />
 			</div>
 			
 		</div>
@@ -92,11 +94,11 @@
 		<div id="aditional-information" class="intervaloAlmoco">
 			<h2>Intervalo (Hoje)</h2>
 			<div class="line">
-				<div class="unit label" style="width: 120px;">Saída estimada: </div>
+				<div class="unit label" style="width: 120px;">SaÃ­da estimada: </div>
 				<div id="saidaAlmocoEstimada" class="unit information small"></div> 
 			</div>
 			<div class="line">
-				<div class="unit label" style="width: 120px;">Saída real: </div>
+				<div class="unit label" style="width: 120px;">SaÃ­da real: </div>
 				<div id="saidaAlmocoReal" class="unit information small"></div> 
 			</div>
 			<div class="line">
@@ -108,12 +110,12 @@
 				<div id="retornoAlmocoReal" class="unit information small"></div> 
 			</div>
 			<div class="line last-line">
-				<div class="unit label" style="width: 120px;" id="retornoAlmocoTimerLabel">Tempo até retorno: </div>
+				<div class="unit label" style="width: 120px;" id="retornoAlmocoTimerLabel">Tempo atÃ© retorno: </div>
 				<div id="retornoAlmocoTimer" class="unit information small"></div> 
 			</div>
 		</div>
 		
-		<h2>Informações consolidadas</h2>
+		<h2>InformaÃ§Ãµes consolidadas</h2>
 		
 		<div class="line last-line">
 			<div class="unit label">Horas extras: </div>
@@ -125,10 +127,10 @@
 		</div>
 		
 
-		<h2>Informações do mês</h2>
+		<h2>InformaÃ§Ãµes do mÃªs</h2>
 		
 		<div class="line">
-			<div class="unit label">Mês: </div> 
+			<div class="unit label">MÃªs: </div> 
 			<div class="unit information small" id="month-name"></div>
 		</div>
 		
@@ -138,13 +140,13 @@
 		</div>
 		
 		<div class="line btImportMonth" style="text-align: center; padding-top: 10px; padding-left: 10px; padding-right: 10px; padding-bottom: 10px; width: 400px;">
-			<input type="button" id="importMonth" value="Importar mês (Sistema Ahgora)"/>
+			<input type="button" id="importMonth" value="Importar mÃªs (Sistema Ahgora)"/>
 		</div>
 		
 		<div class="line" style="text-align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 20px; width: 400px; margin-top: 10px; border-bottom: 1px dotted #666;"">
-			<input type="button" class="" value="Ver mês anterior" id="prev-month" />
-			<input type="button" id="current-month" value="Ver mês atual"/>
-			<input type="button" value="Ver próximo mês" id="next-month" />
+			<input type="button" class="" value="Ver mÃªs anterior" id="prev-month" />
+			<input type="button" id="current-month" value="Ver mÃªs atual"/>
+			<input type="button" value="Ver prÃ³ximo mÃªs" id="next-month" />
 		</div>
 		
 		<div id="legend">
@@ -165,30 +167,30 @@
 		</div>
 
 		<div id="aditional-information">
-			<h2>Informações adicionais</h2>
+			<h2>InformaÃ§Ãµes adicionais</h2>
 			<!--
 			<div class="line">
-				<div class="unit label">Horário médio de entrada: </div> 
+				<div class="unit label">HorÃ¡rio mÃ©dio de entrada: </div> 
 				<div class="unit information small" id="entrance-avg"></div>
 			</div>
 
 			<div class="line">
-				<div class="unit label">Horário médio de saída: </div> 
+				<div class="unit label">HorÃ¡rio mÃ©dio de saÃ­da: </div> 
 				<div class="unit information small" id="exit-avg"></div>
 			</div>
 			-->
 			<div class="line" id="positive-days">
-				<div class="unit label">Qtde. de dias que você pode tirar: </div> 
+				<div class="unit label">Qtde. de dias que vocÃª pode tirar: </div> 
 				<div class="unit information small" id="days-off"></div>
 			</div>
 
 			<div class="line hide" id="negative-days">
-				<div class="unit label">Qtde. de dias que você está devendo: </div> 
+				<div class="unit label">Qtde. de dias que vocÃª estÃ¡ devendo: </div> 
 				<div class="unit information small negative-hours" id="days-to-pay"></div>
 			</div>
 
 			<div class="line last-line">
-				<div class="unit label">Qtde. de dias que você se ausentou: </div> 
+				<div class="unit label">Qtde. de dias que vocÃª se ausentou: </div> 
 				<div class="unit information small" id="ausent-days"></div>
 			</div>
 		</div>
@@ -199,12 +201,12 @@
 			<tr id="printable-header" class="fixed-row">
 				<th colspan="2">Dia</th>
 				<th>Entrada</th>
-				<th>Ida almoço</th>
-				<th>Volta almoço</th>
-				<th>Saída</th>
+				<th>Ida almoÃ§o</th>
+				<th>Volta almoÃ§o</th>
+				<th>SaÃ­da</th>
 				<th>Remoto</th>
 				<th>Total</th>
-				<th>Almoço</th>
+				<th>AlmoÃ§o</th>
 				<th>Extra</th>
 				<th>Obs</th>
 				<th>OPTO</th>
@@ -229,13 +231,13 @@
 					<a href="#view-full-obs" class="view-full-obs {cssObsPreenchida}" title="{obs}"></a>
 				</td>
 				<td class="obs_cell note fakeLink ausentLine" onClick="toogleAusent('{data}');"> 
-					<input type="checkbox" value="S" class="ausent hiddenObj" title="Marque se você faltou neste dia"/>
-					<img src="res/img/ausent.png" title="Ausente no local de trabalho. Clique para sinalizar presença neste dia." class="ausentImg"/>
-					<img src="res/img/user2.png" title="Presente no local de trabalho. Clique para sinalizar ausência neste dia." class="hiddenObj"/>
+					<input type="checkbox" value="S" class="ausent hiddenObj" title="Marque se vocÃª faltou neste dia"/>
+					<img src="res/img/ausent.png" title="Ausente no local de trabalho. Clique para sinalizar presenÃ§a neste dia." class="ausentImg"/>
+					<img src="res/img/user2.png" title="Presente no local de trabalho. Clique para sinalizar ausÃªncia neste dia." class="hiddenObj"/>
 				</td>
 			    <td style="border-right: 1px solid #ccc; padding: 5px; cursor: pointer;">
 					<a id="{data}" >
-						<img src="res/img/oponto.png" id="ref{data}" onClick="opontoCalcs('{data}');" title="Informações para OPONTO"/>
+						<img src="res/img/oponto.png" id="ref{data}" onClick="opontoCalcs('{data}');" title="InformaÃ§Ãµes para OPONTO"/>
 					</a>
 				</td>
 				<td style="border-right: 1px solid #ccc; padding: 5px; cursor: pointer;">
@@ -245,7 +247,7 @@
 						</a>
 					</div>
 					<div class="hiddenObj upDayOff">
-						<img src="res/img/offimg.png" title="Importação de batidas desativada. Verifique suas Configurações."/>
+						<img src="res/img/offimg.png" title="ImportaÃ§Ã£o de batidas desativada. Verifique suas ConfiguraÃ§Ãµes."/>
 					</div>
 				</td>
 			</tr>
@@ -262,14 +264,14 @@
 	<div id="configuration" class="lightbox">
 		<!-- <a href="#close" class="close close-button" id="closeSettings">x</a> -->
 		
-		<h2>Configurações</h2>
+		<h2>ConfiguraÃ§Ãµes</h2>
 		
 		<div class="line">
-			<label class="unit size1of3">Carga de trabalho diária: </label> 
+			<label class="unit size1of3">Carga de trabalho diÃ¡ria: </label> 
 			<input type="number" step="0.01" min="0" id="total-work" class="size2of3 lastUnit" />
 		</div>
 		<div class="line"> 
-			<label class="unit size1of3">Tempo de almoço padrão: </label> 
+			<label class="unit size1of3">Tempo de almoÃ§o padrÃ£o: </label> 
 			<input type="number" min="0" step="0.25" id="lunch-time" class="size2of3 lastUnit" />
 		</div>
 		<div class="line"> 
@@ -284,7 +286,7 @@
 			<input type="checkbox" class="utilDay" value="1" id="permAhgora"/> Importar Batidas do Sistema Ahgora
 		</div>
 		<div class="line"> 
-			<input type="checkbox" class="utilDay" value="1" id="permNotif"/> Utilizar Notificações
+			<input type="checkbox" class="utilDay" value="1" id="permNotif"/> Utilizar NotificaÃ§Ãµes
 		</div>
 		<!--  
 		<div class="line"> 
@@ -297,20 +299,20 @@
 		</div>
 		<br/>
 		<div class="line utilDays"> 
-			<input type="checkbox" class="utilDay" value="1" /> 2ª
-			<input type="checkbox" class="utilDay" value="2" /> 3ª
-			<input type="checkbox" class="utilDay" value="3" /> 4ª
-			<input type="checkbox" class="utilDay" value="4" /> 5ª
-			<input type="checkbox" class="utilDay" value="5" /> 6ª
-			<input type="checkbox" class="utilDay" value="6" /> Sábado
+			<input type="checkbox" class="utilDay" value="1" /> 2Âª
+			<input type="checkbox" class="utilDay" value="2" /> 3Âª
+			<input type="checkbox" class="utilDay" value="3" /> 4Âª
+			<input type="checkbox" class="utilDay" value="4" /> 5Âª
+			<input type="checkbox" class="utilDay" value="5" /> 6Âª
+			<input type="checkbox" class="utilDay" value="6" /> SÃ¡bado
 			<input type="checkbox" class="utilDay" value="0" /> Domingo
 		</div>
 		
 		<div id="showAhgora">
-			<h2>Integração Ahgora</h2>
+			<h2>IntegraÃ§Ã£o Ahgora</h2>
 	
 			<div class="line"> 
-				<label class="unit size1of3">Matrícula: </label> 
+				<label class="unit size1of3">MatrÃ­cula: </label> 
 				<input type="number" min="0" step="0.1" id="matricula" class="size2of3 lastUnit" />
 			</div>
 			<div class="line"> 
@@ -324,9 +326,9 @@
 		</div>
 		
 		<div id="showNotif">
-			<h2>Notificações</h2>
+			<h2>NotificaÃ§Ãµes</h2>
 			<div class="line"> 
-				<input type="button" id="revisarPermissoes" value="Checar Permissões" />
+				<input type="button" id="revisarPermissoes" value="Checar PermissÃµes" />
 			</div>
 		</div>
 		<div class="center">
@@ -342,7 +344,7 @@
 			<table id="holidays-list">
 				<tr>
 					<th>Data</th>
-					<th>Descrição</th>
+					<th>DescriÃ§Ã£o</th>
 				</tr>
 				<tr id="holiday_template">
 					<td><input type="text" class="holiday_date" /></td>
@@ -360,7 +362,7 @@
 		<h2>Exportar dados</h2>
 		<a href="#close" class="close close-button">x</a>
 		
-		Salve o conteúdo abaixo em um arquivo, que pode ser reimportado novamente.
+		Salve o conteÃºdo abaixo em um arquivo, que pode ser reimportado novamente.
 		
 		<textarea id="output-export"></textarea>
 
@@ -370,7 +372,7 @@
 		<h2>Importar dados</h2>
 		<a href="#close" class="close close-button">x</a>
 		
-		Deseja sobrescrever suas informações pelas informações do arquivo a ser importado?
+		Deseja sobrescrever suas informaÃ§Ãµes pelas informaÃ§Ãµes do arquivo a ser importado?
 		
 		<div class="center">
 			<input type="button" id="proced-import" class="close center" value="Confirmar" />
@@ -387,20 +389,20 @@
 			O projeto original pode ser encontrado em:  <br/>
 			- https://github.com/renatomenegasso/Controle-ponto<br/>
 			<br/>
-			A extensão original está publicada na Chrome Webstore em: <br/>
+			A extensÃ£o original estÃ¡ publicada na Chrome Webstore em: <br/>
 			- https://chrome.google.com/webstore/detail/controle-de-banco-de-hora/pfifkcaekcnananahibcebeeknnlfhna?utm_source=chrome-ntp-icon
 			<br/>
 		</div>
-		<h2>Sobre esta versão</h2>
+		<h2>Sobre esta versÃ£o</h2>
 		<div class="left">
 			v1.17:
-			Correções de bugs com as notificações; Implementando data inicial para cálculo dos saldos do banco de horas;<br/>
+			CorreÃ§Ãµes de bugs com as notificaÃ§Ãµes; Implementando data inicial para cÃ¡lculo dos saldos do banco de horas;<br/>
 			<br/>
 			Desenvolvedores:<br/>
 			Eder Franco (efranco23@gmail.com)<br/>
 			<br/>
 			Grupo de Testes:<br/>
-			Jean Alisson (jaon82@gmail.com), Marcus Amaral (m4rkux@gmail.com), Leandro Araújo (leandro.cesar.ma@gmail.com), Luiz Franco (lmmfranco@gmail.com), Herbert Ribeiro (herbert.rlopes@gmail.com), Renan Bezerra (renankcb@gmail.com) e  Igor Martins (igor.martins@gmail.com).			<br/>
+			Jean Alisson (jaon82@gmail.com), Marcus Amaral (m4rkux@gmail.com), Leandro AraÃºjo (leandro.cesar.ma@gmail.com), Luiz Franco (lmmfranco@gmail.com), Herbert Ribeiro (herbert.rlopes@gmail.com), Renan Bezerra (renankcb@gmail.com) e  Igor Martins (igor.martins@gmail.com).			<br/>
 			<br/>
 		</div>
 		<div align="center">
@@ -410,7 +412,7 @@
 	</div> 
 	
 	<div id="perform-update" class="lightbox">
-		<h2>Importação de dados</h2>
+		<h2>ImportaÃ§Ã£o de dados</h2>
 		<div style="display: table;">
 			<div style="display: table-cell; float: left;">
 				<img src="res/img/loading.gif"/>
@@ -422,27 +424,27 @@
 	</div> 
 	
 	<div id="error-update" class="lightbox">
-		<h2>Importação de dados</h2>
+		<h2>ImportaÃ§Ã£o de dados</h2>
 		<a href="#close" class="close close-button">x</a>
 		<p>
-			<img src="res/img/alerta.gif"/> Não foi possível realizar a importação dos dados.<br/>
-			Verifique as possíveis causas abaixo, e tente novamente:
+			<img src="res/img/alerta.gif"/> NÃ£o foi possÃ­vel realizar a importaÃ§Ã£o dos dados.<br/>
+			Verifique as possÃ­veis causas abaixo, e tente novamente:
 			<ul>
-				<li>Conexão com a internet indisponível;</li>
+				<li>ConexÃ£o com a internet indisponÃ­vel;</li>
 				<li>Bloqueio para acesso ao servidor em https://khi.by;</li>
-				<li>Dados de acesso não foram informados nas Configurações;</li>
+				<li>Dados de acesso nÃ£o foram informados nas ConfiguraÃ§Ãµes;</li>
 			</ul>
 		</p>
 	</div> 
 	
 	<div id="msg-lightbox" class="lightbox">
-		<h2>Importação de dados</h2>
+		<h2>ImportaÃ§Ã£o de dados</h2>
 		<a href="#close" class="close close-button">x</a>
 		<p><img src="res/img/alerta.gif"/> <span id="msg-lightbox-content">...</span></p>
 	</div> 
 	
 	<div id="sucess-update" class="lightbox">
-		<h2>Importação de dados</h2>
+		<h2>ImportaÃ§Ã£o de dados</h2>
 		<!-- <a href="#close" class="close close-button">x</a> -->
 		<div style="display: table;">
 			<div style="display: table-cell; float: left;">
@@ -496,14 +498,14 @@ Este aplicativo foi baseado no projeto de Renato Menegasso de um App do Google C
 O projeto original pode ser encontrado em:  
 - https://github.com/renatomenegasso/Controle-ponto
 
-A extensão original está publicada na Chrome Webstore em: 
+A extensÃ£o original estÃ¡ publicada na Chrome Webstore em: 
 - https://chrome.google.com/webstore/detail/controle-de-banco-de-hora/pfifkcaekcnananahibcebeeknnlfhna?utm_source=chrome-ntp-icon
 
 
-SOBRE ESTA VERSÃO:
+SOBRE ESTA VERSÃƒO:
 
-Foram implementadas notificações para desktop, diversas melhorias 
-nos cálculos de horários de entrada e saída, integração com o 
+Foram implementadas notificaÃ§Ãµes para desktop, diversas melhorias 
+nos cÃ¡lculos de horÃ¡rios de entrada e saÃ­da, integraÃ§Ã£o com o 
 sistema Ahgora e etc.
 
 Desenvolvedores:
@@ -512,14 +514,14 @@ Eder Franco - efranco23@gmail.com
 Grupo de Testes:
 Jean Alisson - jaon82@gmail.com 
 Marcus Amaral - m4rkux@gmail.com 
-Leandro Araújo - leandro.cesar.ma@gmail.com
+Leandro AraÃºjo - leandro.cesar.ma@gmail.com
 Luiz Marcelo Martins Franco - lmmfranco@gmail.com
 Herbert Ribeiro - herbert.rlopes@gmail.com
 Renan Bezerra - renankcb@gmail.com
 Igor Martins - igor.martins@gmail.com
 
-Observação:
-Este projeto é mantido por um fã de Doctor Who (entendedores entenderão).
+ObservaÃ§Ã£o:
+Este projeto Ã© mantido por um fÃ£ de Doctor Who (entendedores entenderÃ£o).
 
           -___________-
          (/     _     \)
