@@ -8,7 +8,27 @@ call grunt uglify
 call grunt minifyHtml
 
 pause
+
+rem Instalar esses caras antes:
+rem npm install -g grunt-cli
+rem cd <yourProjectDir>
+rem npm install grunt --save-dev
+
+rem npm install grunt-contrib-cssmin --save-dev
+rem npm install grunt-contrib-clean --save-dev
+rem npm install grunt-contrib-imagemin --save-dev
+rem npm install grunt-line-remover --save-dev
+rem npm install grunt-contrib-uglify --save-dev
+rem npm install grunt-minify-html
+
+
+rem Não estão mais sendo utilizados
 rem grunt uglify:production
 rem grunt concat min cssmin
 rem grunt htmlmin
 rem grunt lineremover
+
+
+
+
+
