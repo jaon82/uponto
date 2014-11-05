@@ -44,13 +44,13 @@
 		var suffix = tail || '...';
 		
 		if (typeof length == 'undefined') {
-			throw new Error('Par‚metro size n„o definido');
+			throw new Error('Par√¢metro size n√£o definido');
 		}
 		
 		return this.length <= length ? this : this.substr(0, length) + suffix;
 	};
 	
-	var _withAcentuation = '‡ËÏÚ˘‚ÍÓÙ˚‰ÎÔˆ¸·ÈÌÛ˙„ıÁ¿»Ã“Ÿ¬ Œ‘€ƒÀœ÷‹¡…Õ”⁄√’«¥`^®~';
+	var _withAcentuation = '√†√®√¨√≤√π√¢√™√Æ√¥√ª√§√´√Ø√∂√º√°√©√≠√≥√∫√£√µ√ß√Ä√à√å√í√ô√Ç√ä√é√î√õ√Ñ√ã√è√ñ√ú√Å√â√ç√ì√ö√É√ï√á¬¥`^¬®~';
 	var _withoutAcentuation = 'aeiouaeiouaeiouaeiouaocAEIOUAEIOUAEIOUAEIOUAOC     ';
 	
 	string.removeAcentuation = function() {

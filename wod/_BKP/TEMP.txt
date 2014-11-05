@@ -1,2 +1,0 @@
-		src : 'js/**/*.js',
-		dest : 'build/js/main.js'

@@ -1,5 +1,5 @@
 /**
- * Classe de integração com a API do sistema Ahgora
+ * Classe de integraÃ§Ã£o com a API do sistema Ahgora
  * @author Eder Franco
  * @since: v1.11 17/06/2014)
  * @version 1.0
@@ -8,7 +8,7 @@
 function Ahgora(matricula,senha,empresa,helpers,dao,openAlert,closeAlert,monthFunc,timerFunc){
 	
 	IMPORT_URL = "http://khi.by/projetos/pontoconn/";
-	//Fake URL for local testing: "http://localhost/uponto/testes/fake.php";
+	//Fake URL for local testing: "http://localhost/uPonto/testes/fake.php";
 	var AHGORA_MATRICULA = null;
 	var AHGORA_SENHA = null;
 	var AHGORA_EMPRESA = null;
@@ -22,7 +22,7 @@ function Ahgora(matricula,senha,empresa,helpers,dao,openAlert,closeAlert,monthFu
 	initNotifTimer = timerFunc;
 	
 	if(matricula == null || senha == null || empresa == null){
-		var msg = "Informe sua Matrícula, Senha e Empresa nas Configurações antes de realizar a importação.";
+		var msg = "Informe sua MatrÃ­cula, Senha e Empresa nas ConfiguraÃ§Ãµes antes de realizar a importaÃ§Ã£o.";
 		$("#msg-lightbox-content").html(msg);
 		closeLightbox("#perform-update");
 		openLightbox("#msg-lightbox");
@@ -40,7 +40,7 @@ Ahgora.prototype.teste = function(){
 
 Ahgora.prototype.checkSettings = function(){
 	if(matricula == null || senha == null || empresa == null){
-		var msg = "Informe sua Matrícula, Senha e Empresa nas Configurações antes de realizar a importação.";
+		var msg = "Informe sua MatrÃ­cula, Senha e Empresa nas ConfiguraÃ§Ãµes antes de realizar a importaÃ§Ã£o.";
 		$("#msg-lightbox-content").html(msg);
 		closeLightbox("#perform-update");
 		openLightbox("#msg-lightbox");
@@ -119,8 +119,8 @@ Ahgora.prototype.import = function (month,year,day){
 						var ccD = curDate.getDate();
 						var ccDate = new Date(ccY, ccM, ccD);
 						
-						//Só vai armazenar a importação se não foi uma importação por dia; ou
-						//Se foi uma importação por dia, só vai alterar o dia solicitado.
+						//SÃ³ vai armazenar a importaÃ§Ã£o se nÃ£o foi uma importaÃ§Ã£o por dia; ou
+						//Se foi uma importaÃ§Ã£o por dia, sÃ³ vai alterar o dia solicitado.
 						day = parseInt(day);
 						dia = parseInt(dia);
 						
@@ -129,7 +129,7 @@ Ahgora.prototype.import = function (month,year,day){
 							var timeRowDate = rowDate.getTime();
 							var dayExists = localStorage.getItem(timeRowDate);
 
-							//Não vai sobrescrever registros que já existem, exceto quado se trata de uma atualização por dia.
+							//NÃ£o vai sobrescrever registros que jÃ¡ existem, exceto quado se trata de uma atualizaÃ§Ã£o por dia.
 							if(dayExists == null || day == dia){
 								var jsonInfo = {
 									entrada: (!batidas[0])?0:_dateHelpers.parseDateTime(batidas[0], rowDate),
@@ -143,29 +143,29 @@ Ahgora.prototype.import = function (month,year,day){
 								//Armazena no localStorage
 								_dao.storeDate(rowDate, jsonInfo);
 								
-							}//Se o dia não possui registro, ou se foi uma importação por dia
-						}//Se foi solicitado um dia específico, ou se o dia está setado como Zero.
+							}//Se o dia nÃ£o possui registro, ou se foi uma importaÃ§Ã£o por dia
+						}//Se foi solicitado um dia especÃ­fico, ou se o dia estÃ¡ setado como Zero.
 					}//Se retornou algo da API
 					
 				}
 			}
 			
 		} else {//Se ocorreu erro.
-			console.log("Importação falhou.");
+			console.log("ImportaÃ§Ã£o falhou.");
 			closeLightbox("#perform-update");
 			openLightbox("#error-update");
 			
 		}//Se a resposta veio com sucesso.
 		closeLightbox("#perform-update");
 		
-	}, "json").fail(function() {//Se ocorreu erro na requisição
+	}, "json").fail(function() {//Se ocorreu erro na requisiÃ§Ã£o
 		closeLightbox("#perform-update");
 		openLightbox("#error-update");
 		
 	}).done(function(){
-		//Recria o mês ao finalizara  importação
+		//Recria o mÃªs ao finalizara  importaÃ§Ã£o
 		buildMonth();
-		//Chama novamente as funções de reset dos timers
+		//Chama novamente as funÃ§Ãµes de reset dos timers
 		//initNotifTimer();
 		window.location.reload();
 	});

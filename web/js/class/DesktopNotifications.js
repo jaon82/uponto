@@ -1,5 +1,5 @@
 /**
- * NotificaÁıes para Desktop
+ * Notifica√ß√µes para Desktop
  * @author Eder Franco
  * @since: v1.8 (26/05/2014)
  * @version 1.0
@@ -16,7 +16,7 @@ DesktopNotifications.prototype.teste = function(){
 };
 
 /**
- * Verifica se o browser oferece suporte para notificaÁıes e se o usu·rio j· concedeu permiss„o
+ * Verifica se o browser oferece suporte para notifica√ß√µes e se o usu√°rio j√° concedeu permiss√£o
  * Baseado em: 	https://developer.mozilla.org/en-US/docs/Web/API/notification
  * 				https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/notifications
  * 				https://developer.mozilla.org/en-US/docs/WebAPI/Using_Web_Notifications
@@ -28,13 +28,13 @@ DesktopNotifications.prototype.checkPermission = function(){
 	var result = {isOK: false, msg: ""};
 	// Let's check if the browser supports notifications
 	if (!("Notification" in window)) {
-	  result.msg = "Este browser n„o oferece suporte para notificaÁıes de desktop";
+	  result.msg = "Este browser n√£o oferece suporte para notifica√ß√µes de desktop";
 	  result.isOK = false;
 	}
 	// Let's check if the user is okay to get some notification
 	else if (Notification.permission === "granted") {
 	// If it's okay let's create a notification
-	  result.msg = "NotificaÁıes suportadas e permiss„o concedida pelo usu·rio.";
+	  result.msg = "Notifica√ß√µes suportadas e permiss√£o concedida pelo usu√°rio.";
 	  result.isOK = true;
 	}
 	
@@ -51,7 +51,7 @@ DesktopNotifications.prototype.checkPermission = function(){
 		
 		  // If the user is okay, let's create a notification
 		  if (permission === "granted") {
-			  result.msg = "NotificaÁıes suportadas e permiss„o concedida pelo usu·rio.";
+			  result.msg = "Notifica√ß√µes suportadas e permiss√£o concedida pelo usu√°rio.";
 			  result.isOK = true;
 		  }
 		});
@@ -110,13 +110,13 @@ DesktopNotifications.prototype.create = function(title,options,url,sound){
 			notification.onclick = notificationClick;
 		}
 	} else {
-		if(confirm("VocÍ ainda n„o autorizou o uso de notificaÁıes.\nDeseja revisar as pemissıes?")){
+		if(confirm("Voc√™ ainda n√£o autorizou o uso de notifica√ß√µes.\nDeseja revisar as pemiss√µes?")){
 			permission = this.checkPermission();
 		}
 	}
 };
 
-//FunÁıes locais
+//Fun√ß√µes locais
 function notificationClick(){
 	if(clickUrl != null){
 		window.open(clickUrl);

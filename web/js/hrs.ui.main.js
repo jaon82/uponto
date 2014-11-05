@@ -83,12 +83,8 @@ hrs.ui.main = (function($, helpers, dao){
 			
 	};
 	
-	function updateScreen(){
-		window.location.reload();
-	}
-	
 	/**
-	 * Realizar a importaÁ„o/atualizaÁ„o manual de um dia especÌfico
+	 * Realizar a importa√ß√£o/atualiza√ß√£o manual de um dia espec√≠fico
 	 */
 	window.updateDay = function(dateId){
 		var cYear = currentDate.getFullYear();
@@ -108,120 +104,12 @@ hrs.ui.main = (function($, helpers, dao){
 		ahgora.import(cMonth, cYear, cDay);
 	};
 	
-	function getScreenMonth(){
-		var cYear = $("#month-name").text();
-		cYear = $.trim(cYear);
-		cYear = cYear.replace(" ","").replace(" ","");
-		var ini = parseInt(cYear.length);
-		cYear = cYear.substring(ini - 4,ini);
-		return cYear;
-	}
-	
-	function updateLine(rowDate){
-	
-		/*
-		var inicio = $("#"+rowDate+" .begin-day input").val();
-		var almoco = $("#"+rowDate+" .start-lunch input").val();
-		var retorno = $("#"+rowDate+" .end-lunch input").val();
-		var saida = $("#"+rowDate+" .end-day input").val();
-		var extra = $("#"+rowDate+" .vpn-cell input").val();
-		var total = $("#"+rowDate+" .all-worked").text();
-		var almoco = $("#"+rowDate+" .lunch").text();
-		var bh = $("#"+rowDate+" .excedente").text();
-		var excluir = $("#"+rowDate+" .delIcon").src();
-		var faltaIcon = $("#"+rowDate+" .begin-day input").val();
-		var ausente = $("#"+rowDate+" .begin-day input").val();
-		*/
-		
-		$("#"+rowDate+" .begin-day input").val("");
-		$("#"+rowDate+" .start-lunch input").val("");
-		$("#"+rowDate+" .end-lunch input").val("");
-		$("#"+rowDate+" .end-day input").val("");
-		$("#"+rowDate+" .end-day input").attr("placeholder","");
-		$("#"+rowDate+" .vpn-cell input").val("");
-		$("#"+rowDate+" .all-worked").text("");
-		$("#"+rowDate+" .lunch").text("");
-		$("#"+rowDate+" .excedente").text("");
-		//var excluir = $("#"+rowDate+" .delIcon").src();
-		//var faltaIcon = $("#"+rowDate+" .begin-day input").val();
-		//var ausente = $("#"+rowDate+" .begin-day input").val();
-	
-	}
-	
-	/**
-	 * Remover um dia especÌfico
-	 */
-	window.removeDay = function(dateId){
-		var cYear = getScreenMonth();
-		var cDay = dateId.substr(0,2);
-		var cMonth = dateId.substr(3,2);
-		cMonth = parseInt(cMonth) - 1;
-		if(parseInt(cMonth) < 10){
-			cMonth = "0"+cMonth;
-		}
-		var ccDate = new Date(cYear, cMonth, cDay);
-		var rowDate = ccDate.getTime();
-		var dayExists = localStorage.getItem(rowDate);
-
-		if(confirm("Deseja realmente excluir este dia?")){
-			localStorage.removeItem(rowDate);
-			updateLine(rowDate);
-		}
-		
-	};
-	
-	/**
-	 * Remover um dia especÌfico
-	 */
-	window.toogleAusent = function(dateId){
-		var cYear = getScreenMonth();
-		var cDay = dateId.substr(0,2);
-		var cMonth = dateId.substr(3,2);
-		cMonth = parseInt(cMonth) - 1;
-		if(parseInt(cMonth) < 10){
-			cMonth = "0"+cMonth;
-		}
-		var ccDate = new Date(cYear, cMonth, cDay);
-		var rowDate = ccDate.getTime();
-		var dayExists = localStorage.getItem(rowDate);
-		var ausent = $("#"+rowDate+" .ausentLine input");
-		var ausentImg = $("#"+rowDate+" .ausentImg");
-		var isAusent = $("#"+rowDate+" .ausentLine input").attr("checked");
-		
-		//alert(isAusent);
-		if(isAusent && isAusent.length > 0){
-			ausent.removeAttr("checked");
-			ausent.val("N");
-			ausentImg.attr("src","res/img/ausent.png");
-			ausentImg.attr("title","Presente no local de trabalho. Clique para sinalizar ausÍncia neste dia.");
-		} else {
-			ausent.attr("checked","checked");
-			ausent.val("S");
-			ausentImg.attr("src","res/img/user2.png");
-			ausentImg.attr("title","Ausente no local de trabalho. Clique para sinalizar presenÁa neste dia.");
-		}
-		
-		currentMonth.changeEvent2(rowDate);
-		
-		
-		
-		/*
-		if(confirm("Deseja realmente excluir este dia?")){
-			localStorage.removeItem(rowDate);
-			updateLine(rowDate);
-		}
-		*/
-		
-	};
-	
-	
-	
 	function initAhgora(){
 		
-		//Busca e seta as configuraÁıes
+		//Busca e seta as configura√ß√µes
 		var set = dao.loadSettings();
 		
-		//1. Verifica se a importaÁ„o est· ativa
+		//1. Verifica se a importa√ß√£o est√° ativa
 		if(set.permAhgora == 1){
 			var matricula = set.matricula;
 			var senha = set.senha;
@@ -240,7 +128,7 @@ hrs.ui.main = (function($, helpers, dao){
 			}
 			
 			if(matricula == null || senha == null || empresa == null){
-				var msg = "Informe sua MatrÌcula, Senha e Empresa nas ConfiguraÁıes antes de realizar a importaÁ„o.";
+				var msg = "Informe sua Matr√≠cula, Senha e Empresa nas Configura√ß√µes antes de realizar a importa√ß√£o.";
 				$("#msg-lightbox-content").html(msg);
 				closeLightbox("#perform-update");
 				openLightbox("#msg-lightbox");
@@ -294,7 +182,7 @@ hrs.ui.main = (function($, helpers, dao){
 			var condS = (parseInt(cSec) == 0);
 			
 			if(parseInt(cHour) > 7 && condM && condS){
-				var mensagem = "Bom dia! VocÍ j· registrou seu ponto hoje?";
+				var mensagem = "Bom dia! Voc√™ j√° registrou seu ponto hoje?";
 				notificationGeral(mensagem,"default");
 			}
 		} else 
@@ -315,7 +203,7 @@ hrs.ui.main = (function($, helpers, dao){
 		initGlobalTimers();
 	
 		var _dateHelpers = hrs.helpers.dateTime;
-		//1. Busca a hora de saÌda estimada do dia atual
+		//1. Busca a hora de sa√≠da estimada do dia atual
 		var curDate = new Date();
 		var ccM = curDate.getMonth();
 		var ccY = curDate.getFullYear();
@@ -344,7 +232,7 @@ hrs.ui.main = (function($, helpers, dao){
 		retornoAlmoco 
 		retornoAlmocoTimer
 		*/
-		$("#saidaAlmocoEstimada").html("12:00");//Mudar isso por um c·lculo depois, feito a partir das configuraÁıes.
+		$("#saidaAlmocoEstimada").html("12:00");//Mudar isso por um c√°lculo depois, feito a partir das configura√ß√µes.
 		var saidaConteudo;
 		if(ida_almoco.length > 0){
 			saidaConteudo = ida_almoco;
@@ -390,7 +278,7 @@ hrs.ui.main = (function($, helpers, dao){
 			updateHoraSaida(exitDate,dif2Calc);
 		} else {
 			$("#proxSaidaTimer").css("color","black");
-			$("#saidaTimeLabel").html("Tempo atÈ saÌda: ");
+			$("#saidaTimeLabel").html("Tempo at√© sa√≠da: ");
 			$("#proxSaidaExtimada").html("-");
 			$("#proxSaidaTimer").html("-");
 		}
@@ -405,13 +293,13 @@ hrs.ui.main = (function($, helpers, dao){
 			
 			var title = "Controle de Banco de Horas";
 			var options = {
-					  body: "Faltam "+tempo+" minuto(s) para sua saÌda. Fique atento!",
+					  body: "Faltam "+tempo+" minuto(s) para sua sa√≠da. Fique atento!",
 					  icon: "res/icon.png"
 					};
 			notif.create(title,options,null);
 			
 		} else {
-			alert("NotificaÁıes n„o implementadas para esta vers„o do seu browser.");
+			alert("Notifica√ß√µes n√£o implementadas para esta vers√£o do seu browser.");
 		}
 		
 	}
@@ -431,7 +319,7 @@ hrs.ui.main = (function($, helpers, dao){
 			notif.create(title,options,null,sound);
 			
 		} else {
-			alert("NotificaÁıes n„o implementadas para esta vers„o do seu browser.");
+			alert("Notifica√ß√µes n√£o implementadas para esta vers√£o do seu browser.");
 		}
 		
 	}
@@ -444,7 +332,7 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		if(dif2Calc > 0){
 			$("#retornoAlmocoTimer").css("color","green");
-			$("#retornoAlmocoTimerLabel").html("Tempo atÈ retorno: ");
+			$("#retornoAlmocoTimerLabel").html("Tempo at√© retorno: ");
 			var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
 			dif2Calc = dif.getTime();
 		} else {
@@ -465,16 +353,16 @@ hrs.ui.main = (function($, helpers, dao){
 			switch(m){
 			case (5):
 				if(s == 59){
-					var mensagem = "Faltam "+m+" minuto(s) para encerrar seu hor·rio de almoÁo! Fique atento.";
+					var mensagem = "Faltam "+m+" minuto(s) para encerrar seu hor√°rio de almo√ßo! Fique atento.";
 					notificationGeral(mensagem,"five");
 				}
 				break;
 			case 0:
 				if(s == 59){
-					var mensagem = "Falta menos de um minuto minuto(s) para encerrar seu hor·rio de almoÁo!";
+					var mensagem = "Falta menos de um minuto minuto(s) para encerrar seu hor√°rio de almo√ßo!";
 					notificationGeral(mensagem,"default");
 				} else if(s == 00){
-					var mensagem = "Seu hor·rio de almoÁo j· encerrou! VocÍ deve bater seu ponto imediatamente!!!";
+					var mensagem = "Seu hor√°rio de almo√ßo j√° encerrou! Voc√™ deve bater seu ponto imediatamente!!!";
 					notificationGeral(mensagem,"default");
 				}
 				break;
@@ -482,7 +370,7 @@ hrs.ui.main = (function($, helpers, dao){
 	    } else if (dif2Calc < 0 && parseInt(h) == 0){
 		
 			if(m > 0 && s == 00){
-				var mensagem = "Seu hor·rio de almoÁo j· encerrou! VocÍ deve bater seu ponto imediatamente!!!";
+				var mensagem = "Seu hor√°rio de almo√ßo j√° encerrou! Voc√™ deve bater seu ponto imediatamente!!!";
 				notificationGeral(mensagem,"default");
 			}
 		}
@@ -506,7 +394,7 @@ hrs.ui.main = (function($, helpers, dao){
 		
 		
 		if(dif2Calc > 0){
-			$("#saidaTimeLabel").html("Tempo atÈ saÌda: ");
+			$("#saidaTimeLabel").html("Tempo at√© sa√≠da: ");
 			$("#proxSaidaTimer").css("color","red");
 			var dif = _dateHelpers.getTimeDiff(exitDate,curDate);
 			dif2Calc = dif.getTime();
@@ -527,20 +415,20 @@ hrs.ui.main = (function($, helpers, dao){
 			case 30:
 				if(s == 59){
 					//notificationTeste(m);
-					var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+					var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"default");
 				}
 				break;
 			case 20:
 				if(s == 59){
 					//notificationTeste(m);
-					var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+					var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"default");
 				}
 				break;
 			case 10:
 				if(s == 59){
-					var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+					var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"ten");
 					//notificationTeste(m);
 				}
@@ -548,18 +436,18 @@ hrs.ui.main = (function($, helpers, dao){
 			case 5:
 				if(s == 59){
 					if(m == 5){					
-						var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+						var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 						notificationGeral(mensagem,"five");
 					} else {
 						//notificationTeste(m);
-						var mensagem = "Faltam "+m+" minuto(s) para sua saÌda. Fique atento!";
+						var mensagem = "Faltam "+m+" minuto(s) para sua sa√≠da. Fique atento!";
 						notificationGeral(mensagem,"chimes");
 					}
 				}
 				break;
 			case 0:
 				if(s == 59){
-					var mensagem = "Falta menos de 1 minuto para sua saÌda. Fique atento!";
+					var mensagem = "Falta menos de 1 minuto para sua sa√≠da. Fique atento!";
 					notificationGeral(mensagem,"default");
 				}
 				break;

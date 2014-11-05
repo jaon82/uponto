@@ -1,1 +1,5 @@
 .git/
+.settings/
+/node_modules/
+/build/
+

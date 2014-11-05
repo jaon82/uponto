@@ -1,1 +1,0 @@
-console.log(window.webkitNotifications?"Notifications are supported!":"Notifications are not supported for this Browser/OS version yet.");

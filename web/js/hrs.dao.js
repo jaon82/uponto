@@ -183,28 +183,14 @@ hrs.dao = (function($, helpers){
 		if(settings.initialBalance){
 			totalExtra = settings.initialBalance * 60 * 60 * 1000;
 		}
-		
-		var initDateControl = 0;
-		if(settings.controlSince){
-			var dia = settings.controlSince.substr(0,2);
-			var mes = settings.controlSince.substr(3,2);
-			var ano = settings.controlSince.substr(6,4);
-			var controlDate = new Date(parseInt(ano), parseInt(mes)-1, parseInt(dia));
-			initDateControl = controlDate.getTime();
-		} 
 
 		for(var k in localStorage){
-			if(isNaN(k)){
+			if(isNaN(k))
 				continue;
-			}
 
-			if(initDateControl > 0 && k < initDateControl){
-				continue;
-			}
-		
 			var dt = new Date(parseInt(k)),
 				info = public.getDateInfo(k);
-		
+			
 			if(info.ausent){
 				var totalDay = getTotalWork(dt, info.holiday != null) * 60 * 60 * 1000;
 				if(dt.getMonth() == month && dt.getFullYear() == year){
